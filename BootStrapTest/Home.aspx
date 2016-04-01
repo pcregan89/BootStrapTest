@@ -23,7 +23,7 @@
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 		  <form class="navbar-form navbar-right">
-			<button type="submit" class="btn btn-primary">Sign in</button>
+			<button type="submit" class="btn btn-primary">Log in</button>
 		  </form>
 		</div><!--/.navbar-collapse -->
 	  </div>
