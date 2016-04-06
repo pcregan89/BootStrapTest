@@ -139,7 +139,7 @@
 			  </div>
 		  </div>
 		</div>--%>
-        <div>
+        <%--<div id="accordion">
             <h2 class="help-question"><i class="fa fa-chevron-right icon-data"></i>
                 <a href="#" style="margin-left:0px">How Can I Reset My Password?</a></h2>
             <div style="display:none;">Click this link and enter your email address. You will be sent a link to reset your password.<br />
@@ -159,7 +159,63 @@
                 <input type="hidden" class="rating-tooltip-manual" data-filled="fa fa-star fa-2x custom-star"  data-empty="fa fa-star-o fa-2x" data-fractions="2"/>
             </div>
           </div>
-	  </div>
+	  </div>--%>
+          <div class="container">
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                How Can I Change My Password?
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                        <div class="panel-body">
+                            Click this link and enter your email address. You will be sent a link to reset your password.<br />
+                            <i class="fa fa-minus-circle fa-lg" style="color:red; vertical-align:15%"></i>
+                            <input type="hidden" class="rating-tooltip-manual" data-filled="fa fa-star fa-2x custom-star"  data-empty="fa fa-star-o fa-2x" data-fractions="2"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingTwo">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                My Account Has Been Locked
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body">
+                            Accounts are locked because of inactivity. Click this link to reactivate your account.<br />
+                            <i class="fa fa-minus-circle fa-lg" style="color:red; vertical-align:15%"></i>
+                            <input type="hidden" class="rating-tooltip-manual" data-filled="fa fa-star fa-2x custom-star"  data-empty="fa fa-star-o fa-2x" data-fractions="2"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingThree">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                How Can I Delete My Account?
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                        <div class="panel-body">
+                            Click this link if you wish to delete your account<br />
+                            <i class="fa fa-minus-circle fa-lg" style="color:red; vertical-align:15%"></i>
+                            <input type="hidden" class="rating-tooltip-manual" data-filled="fa fa-star fa-2x custom-star"  data-empty="fa fa-star-o fa-2x" data-fractions="2"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 	  <hr>
 	</div> <!-- /container -->

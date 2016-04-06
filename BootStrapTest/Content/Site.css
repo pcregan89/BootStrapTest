@@ -91,3 +91,42 @@ input[type="select"] {
     line-height: 1.428571429;
     border-radius: 4px;
 }
+
+a:hover, a:focus{
+    outline: none;
+    text-decoration:none;
+}
+#accordion .panel-heading{
+    background:none;
+    padding:0;
+}
+.panel-title{
+    position: relative;
+}
+.panel-title > a{
+    color: #428bca;
+    font-size: 16px;
+    padding: 9px 20px 9px 40px;
+    border: 1px solid #f1efef;
+    display: block;
+    line-height: 21px;
+}
+.panel-title > a.collapsed{
+    color: #9F9D9D;
+}
+.panel-title > a:before,
+.panel-title > a.collapsed:before{
+    font-family: 'FontAwesome';
+    content: "\f107";
+    padding-right: 10px;
+    position: absolute;
+    left: 15px;
+}
+.panel-title > a.collapsed:before{
+    content: "\f105";
+}
+#accordion .panel-body{
+    color: #828282;
+    font-size: 14px;
+    line-height: 26px;
+}
