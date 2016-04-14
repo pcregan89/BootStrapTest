@@ -13,6 +13,11 @@ namespace BootStrapTest.Helpers
             return db.tbl_Help_Categories.Single(t => t.Help_Category_ID == id);
         }
 
+        public IEnumerable<tbl_Help_Category> GetHelpCategories(dbDataContext db)
+        {
+            return db.tbl_Help_Categories;
+        }
+
         //Add or edit help category
         public int AddUpdateHelpCategory(dbDataContext db, int id, string name, int order, int parent, bool loggedOut)
         {
