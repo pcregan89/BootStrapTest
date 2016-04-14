@@ -16,6 +16,10 @@ namespace BootStrapTest.Helpers
         //Add or edit help category
         public int AddUpdateHelpCategory(dbDataContext db, int id, string name, int order, int parent, bool loggedOut)
         {
+            // Validate 
+            if (name.Length == 0 || name.Length > 50)
+                return -1;
+
             tbl_Help_Category cat;
             if (id > 0)
                 cat = GetHelpCategory(db, id);
@@ -25,24 +29,17 @@ namespace BootStrapTest.Helpers
                 db.tbl_Help_Categories.InsertOnSubmit(cat);
             }
 
-            if (name.Length > 0 && name.Length <= 50)
-                cat.Help_Category_Name = name;
-            if (order != 0)
+            cat.Help_Category_Name = name;
+            if (order > -1)
                 cat.Help_Category_Order = order;
-            if (parent != 0)
+            if (parent > -1)
                 cat.Help_Category_Parent_ID = parent;
             cat.Help_Category_Logged_Out_Available = loggedOut;
 
-            //Get new ID
-            if (id == 0)
-                id = db.tbl_Help_Categories.Last().Help_Category_ID + 1;
 
             db.SubmitChanges();
 
-            if (db.GetChangeSet().Updates.Contains(cat))
-                return id;
-            else
-                return -1;
+            return cat.Help_Category_ID;
         }
 
         //Delete help Category based on category ID

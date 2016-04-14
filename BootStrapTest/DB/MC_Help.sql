@@ -1,6 +1,6 @@
 CREATE TABLE tbl_Help_Category
 (
-	Help_Category_ID					int			not null,
+	Help_Category_ID					int			IDENTITY(1,1) not null,
 	Help_Category_Name					varchar(50)	not null,
 	Help_Category_Order					int			not null,
 	Help_Category_Parent_ID				int,
@@ -12,7 +12,7 @@ CREATE TABLE tbl_Help_Category
 
 CREATE TABLE tbl_Help_Topic
 (
-	Help_Topic_ID						int						not null,
+	Help_Topic_ID						int			IDENTITY(1,1) 			not null,
 	Help_Topic_Header					varchar(100)			not null,
 	Help_Topic_Text						varchar(max)			not null,
 	Help_Category_ID					int						not null,
@@ -31,7 +31,7 @@ CREATE TABLE tbl_Help_Topic
 
 CREATE TABLE tbl_Help_Topic_Tag
 (
-	Help_Topic_Tag_ID		int			not null,
+	Help_Topic_Tag_ID		int		IDENTITY(1,1) 	not null,
 	Help_Topic_ID			int			not null,
 	Help_Topic_Tag_Text		varchar(50)	not null,
 
@@ -42,7 +42,7 @@ CREATE TABLE tbl_Help_Topic_Tag
 
 CREATE TABLE tbl_Help_Topic_Related
 (
-	Help_Topic_Related_ID	int	not null,
+	Help_Topic_Related_ID	int IDENTITY(1,1) 	not null,
 	Help_Topic_ID_First		int	not null,
 	Help_Topic_ID_Second	int	not null,
 

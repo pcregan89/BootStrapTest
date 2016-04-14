@@ -30,6 +30,9 @@ namespace BootStrapTest
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
+    partial void Inserttbl_Help_Topic_Tag(tbl_Help_Topic_Tag instance);
+    partial void Updatetbl_Help_Topic_Tag(tbl_Help_Topic_Tag instance);
+    partial void Deletetbl_Help_Topic_Tag(tbl_Help_Topic_Tag instance);
     partial void Inserttbl_Help_Category(tbl_Help_Category instance);
     partial void Updatetbl_Help_Category(tbl_Help_Category instance);
     partial void Deletetbl_Help_Category(tbl_Help_Category instance);
@@ -39,9 +42,6 @@ namespace BootStrapTest
     partial void Inserttbl_Help_Topic_Related(tbl_Help_Topic_Related instance);
     partial void Updatetbl_Help_Topic_Related(tbl_Help_Topic_Related instance);
     partial void Deletetbl_Help_Topic_Related(tbl_Help_Topic_Related instance);
-    partial void Inserttbl_Help_Topic_Tag(tbl_Help_Topic_Tag instance);
-    partial void Updatetbl_Help_Topic_Tag(tbl_Help_Topic_Tag instance);
-    partial void Deletetbl_Help_Topic_Tag(tbl_Help_Topic_Tag instance);
     #endregion
 		
 		public dbDataContext() : 
@@ -74,6 +74,14 @@ namespace BootStrapTest
 			OnCreated();
 		}
 		
+		public System.Data.Linq.Table<tbl_Help_Topic_Tag> tbl_Help_Topic_Tags
+		{
+			get
+			{
+				return this.GetTable<tbl_Help_Topic_Tag>();
+			}
+		}
+		
 		public System.Data.Linq.Table<tbl_Help_Category> tbl_Help_Categories
 		{
 			get
@@ -97,12 +105,155 @@ namespace BootStrapTest
 				return this.GetTable<tbl_Help_Topic_Related>();
 			}
 		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_Help_Topic_Tag")]
+	public partial class tbl_Help_Topic_Tag : INotifyPropertyChanging, INotifyPropertyChanged
+	{
 		
-		public System.Data.Linq.Table<tbl_Help_Topic_Tag> tbl_Help_Topic_Tags
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Help_Topic_Tag_ID;
+		
+		private int _Help_Topic_ID;
+		
+		private string _Help_Topic_Tag_Text;
+		
+		private EntityRef<tbl_Help_Topic> _tbl_Help_Topic;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnHelp_Topic_Tag_IDChanging(int value);
+    partial void OnHelp_Topic_Tag_IDChanged();
+    partial void OnHelp_Topic_IDChanging(int value);
+    partial void OnHelp_Topic_IDChanged();
+    partial void OnHelp_Topic_Tag_TextChanging(string value);
+    partial void OnHelp_Topic_Tag_TextChanged();
+    #endregion
+		
+		public tbl_Help_Topic_Tag()
+		{
+			this._tbl_Help_Topic = default(EntityRef<tbl_Help_Topic>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Help_Topic_Tag_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Help_Topic_Tag_ID
 		{
 			get
 			{
-				return this.GetTable<tbl_Help_Topic_Tag>();
+				return this._Help_Topic_Tag_ID;
+			}
+			set
+			{
+				if ((this._Help_Topic_Tag_ID != value))
+				{
+					this.OnHelp_Topic_Tag_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Help_Topic_Tag_ID = value;
+					this.SendPropertyChanged("Help_Topic_Tag_ID");
+					this.OnHelp_Topic_Tag_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Help_Topic_ID", DbType="Int NOT NULL")]
+		public int Help_Topic_ID
+		{
+			get
+			{
+				return this._Help_Topic_ID;
+			}
+			set
+			{
+				if ((this._Help_Topic_ID != value))
+				{
+					if (this._tbl_Help_Topic.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnHelp_Topic_IDChanging(value);
+					this.SendPropertyChanging();
+					this._Help_Topic_ID = value;
+					this.SendPropertyChanged("Help_Topic_ID");
+					this.OnHelp_Topic_IDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Help_Topic_Tag_Text", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Help_Topic_Tag_Text
+		{
+			get
+			{
+				return this._Help_Topic_Tag_Text;
+			}
+			set
+			{
+				if ((this._Help_Topic_Tag_Text != value))
+				{
+					this.OnHelp_Topic_Tag_TextChanging(value);
+					this.SendPropertyChanging();
+					this._Help_Topic_Tag_Text = value;
+					this.SendPropertyChanged("Help_Topic_Tag_Text");
+					this.OnHelp_Topic_Tag_TextChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Help_Topic_tbl_Help_Topic_Tag", Storage="_tbl_Help_Topic", ThisKey="Help_Topic_ID", OtherKey="Help_Topic_ID", IsForeignKey=true)]
+		public tbl_Help_Topic tbl_Help_Topic
+		{
+			get
+			{
+				return this._tbl_Help_Topic.Entity;
+			}
+			set
+			{
+				tbl_Help_Topic previousValue = this._tbl_Help_Topic.Entity;
+				if (((previousValue != value) 
+							|| (this._tbl_Help_Topic.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbl_Help_Topic.Entity = null;
+						previousValue.tbl_Help_Topic_Tags.Remove(this);
+					}
+					this._tbl_Help_Topic.Entity = value;
+					if ((value != null))
+					{
+						value.tbl_Help_Topic_Tags.Add(this);
+						this._Help_Topic_ID = value.Help_Topic_ID;
+					}
+					else
+					{
+						this._Help_Topic_ID = default(int);
+					}
+					this.SendPropertyChanged("tbl_Help_Topic");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -147,7 +298,7 @@ namespace BootStrapTest
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Help_Category_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Help_Category_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int Help_Category_ID
 		{
 			get
@@ -321,11 +472,11 @@ namespace BootStrapTest
 		
 		private System.Nullable<int> _Help_Topic_Dislikes;
 		
+		private EntitySet<tbl_Help_Topic_Tag> _tbl_Help_Topic_Tags;
+		
 		private EntitySet<tbl_Help_Topic_Related> _tbl_Help_Topic_Relateds;
 		
 		private EntitySet<tbl_Help_Topic_Related> _tbl_Help_Topic_Relateds1;
-		
-		private EntitySet<tbl_Help_Topic_Tag> _tbl_Help_Topic_Tags;
 		
 		private EntityRef<tbl_Help_Category> _tbl_Help_Category;
 		
@@ -359,14 +510,14 @@ namespace BootStrapTest
 		
 		public tbl_Help_Topic()
 		{
+			this._tbl_Help_Topic_Tags = new EntitySet<tbl_Help_Topic_Tag>(new Action<tbl_Help_Topic_Tag>(this.attach_tbl_Help_Topic_Tags), new Action<tbl_Help_Topic_Tag>(this.detach_tbl_Help_Topic_Tags));
 			this._tbl_Help_Topic_Relateds = new EntitySet<tbl_Help_Topic_Related>(new Action<tbl_Help_Topic_Related>(this.attach_tbl_Help_Topic_Relateds), new Action<tbl_Help_Topic_Related>(this.detach_tbl_Help_Topic_Relateds));
 			this._tbl_Help_Topic_Relateds1 = new EntitySet<tbl_Help_Topic_Related>(new Action<tbl_Help_Topic_Related>(this.attach_tbl_Help_Topic_Relateds1), new Action<tbl_Help_Topic_Related>(this.detach_tbl_Help_Topic_Relateds1));
-			this._tbl_Help_Topic_Tags = new EntitySet<tbl_Help_Topic_Tag>(new Action<tbl_Help_Topic_Tag>(this.attach_tbl_Help_Topic_Tags), new Action<tbl_Help_Topic_Tag>(this.detach_tbl_Help_Topic_Tags));
 			this._tbl_Help_Category = default(EntityRef<tbl_Help_Category>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Help_Topic_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Help_Topic_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int Help_Topic_ID
 		{
 			get
@@ -590,6 +741,19 @@ namespace BootStrapTest
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Help_Topic_tbl_Help_Topic_Tag", Storage="_tbl_Help_Topic_Tags", ThisKey="Help_Topic_ID", OtherKey="Help_Topic_ID")]
+		public EntitySet<tbl_Help_Topic_Tag> tbl_Help_Topic_Tags
+		{
+			get
+			{
+				return this._tbl_Help_Topic_Tags;
+			}
+			set
+			{
+				this._tbl_Help_Topic_Tags.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Help_Topic_tbl_Help_Topic_Related", Storage="_tbl_Help_Topic_Relateds", ThisKey="Help_Topic_ID", OtherKey="Help_Topic_ID_First")]
 		public EntitySet<tbl_Help_Topic_Related> tbl_Help_Topic_Relateds
 		{
@@ -613,19 +777,6 @@ namespace BootStrapTest
 			set
 			{
 				this._tbl_Help_Topic_Relateds1.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Help_Topic_tbl_Help_Topic_Tag", Storage="_tbl_Help_Topic_Tags", ThisKey="Help_Topic_ID", OtherKey="Help_Topic_ID")]
-		public EntitySet<tbl_Help_Topic_Tag> tbl_Help_Topic_Tags
-		{
-			get
-			{
-				return this._tbl_Help_Topic_Tags;
-			}
-			set
-			{
-				this._tbl_Help_Topic_Tags.Assign(value);
 			}
 		}
 		
@@ -683,6 +834,18 @@ namespace BootStrapTest
 			}
 		}
 		
+		private void attach_tbl_Help_Topic_Tags(tbl_Help_Topic_Tag entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_Help_Topic = this;
+		}
+		
+		private void detach_tbl_Help_Topic_Tags(tbl_Help_Topic_Tag entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_Help_Topic = null;
+		}
+		
 		private void attach_tbl_Help_Topic_Relateds(tbl_Help_Topic_Related entity)
 		{
 			this.SendPropertyChanging();
@@ -705,18 +868,6 @@ namespace BootStrapTest
 		{
 			this.SendPropertyChanging();
 			entity.tbl_Help_Topic1 = null;
-		}
-		
-		private void attach_tbl_Help_Topic_Tags(tbl_Help_Topic_Tag entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_Help_Topic = this;
-		}
-		
-		private void detach_tbl_Help_Topic_Tags(tbl_Help_Topic_Tag entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_Help_Topic = null;
 		}
 	}
 	
@@ -755,7 +906,7 @@ namespace BootStrapTest
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Help_Topic_Related_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Help_Topic_Related_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int Help_Topic_Related_ID
 		{
 			get
@@ -887,157 +1038,6 @@ namespace BootStrapTest
 						this._Help_Topic_ID_Second = default(int);
 					}
 					this.SendPropertyChanged("tbl_Help_Topic1");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_Help_Topic_Tag")]
-	public partial class tbl_Help_Topic_Tag : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Help_Topic_Tag_ID;
-		
-		private int _Help_Topic_ID;
-		
-		private string _Help_Topic_Tag_Text;
-		
-		private EntityRef<tbl_Help_Topic> _tbl_Help_Topic;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnHelp_Topic_Tag_IDChanging(int value);
-    partial void OnHelp_Topic_Tag_IDChanged();
-    partial void OnHelp_Topic_IDChanging(int value);
-    partial void OnHelp_Topic_IDChanged();
-    partial void OnHelp_Topic_Tag_TextChanging(string value);
-    partial void OnHelp_Topic_Tag_TextChanged();
-    #endregion
-		
-		public tbl_Help_Topic_Tag()
-		{
-			this._tbl_Help_Topic = default(EntityRef<tbl_Help_Topic>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Help_Topic_Tag_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int Help_Topic_Tag_ID
-		{
-			get
-			{
-				return this._Help_Topic_Tag_ID;
-			}
-			set
-			{
-				if ((this._Help_Topic_Tag_ID != value))
-				{
-					this.OnHelp_Topic_Tag_IDChanging(value);
-					this.SendPropertyChanging();
-					this._Help_Topic_Tag_ID = value;
-					this.SendPropertyChanged("Help_Topic_Tag_ID");
-					this.OnHelp_Topic_Tag_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Help_Topic_ID", DbType="Int NOT NULL")]
-		public int Help_Topic_ID
-		{
-			get
-			{
-				return this._Help_Topic_ID;
-			}
-			set
-			{
-				if ((this._Help_Topic_ID != value))
-				{
-					if (this._tbl_Help_Topic.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnHelp_Topic_IDChanging(value);
-					this.SendPropertyChanging();
-					this._Help_Topic_ID = value;
-					this.SendPropertyChanged("Help_Topic_ID");
-					this.OnHelp_Topic_IDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Help_Topic_Tag_Text", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Help_Topic_Tag_Text
-		{
-			get
-			{
-				return this._Help_Topic_Tag_Text;
-			}
-			set
-			{
-				if ((this._Help_Topic_Tag_Text != value))
-				{
-					this.OnHelp_Topic_Tag_TextChanging(value);
-					this.SendPropertyChanging();
-					this._Help_Topic_Tag_Text = value;
-					this.SendPropertyChanged("Help_Topic_Tag_Text");
-					this.OnHelp_Topic_Tag_TextChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Help_Topic_tbl_Help_Topic_Tag", Storage="_tbl_Help_Topic", ThisKey="Help_Topic_ID", OtherKey="Help_Topic_ID", IsForeignKey=true)]
-		public tbl_Help_Topic tbl_Help_Topic
-		{
-			get
-			{
-				return this._tbl_Help_Topic.Entity;
-			}
-			set
-			{
-				tbl_Help_Topic previousValue = this._tbl_Help_Topic.Entity;
-				if (((previousValue != value) 
-							|| (this._tbl_Help_Topic.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tbl_Help_Topic.Entity = null;
-						previousValue.tbl_Help_Topic_Tags.Remove(this);
-					}
-					this._tbl_Help_Topic.Entity = value;
-					if ((value != null))
-					{
-						value.tbl_Help_Topic_Tags.Add(this);
-						this._Help_Topic_ID = value.Help_Topic_ID;
-					}
-					else
-					{
-						this._Help_Topic_ID = default(int);
-					}
-					this.SendPropertyChanged("tbl_Help_Topic");
 				}
 			}
 		}

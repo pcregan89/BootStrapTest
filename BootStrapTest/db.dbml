@@ -1,8 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="MC_Help" Class="dbDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="WebSettings" ConnectionString="Data Source=.\SQLEXPRESS;Initial Catalog=MC_Help;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="MC_HelpConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.tbl_Help_Topic_Tag" Member="tbl_Help_Topic_Tags">
+    <Type Name="tbl_Help_Topic_Tag">
+      <Column Name="Help_Topic_Tag_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Help_Topic_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Help_Topic_Tag_Text" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="tbl_Help_Topic_tbl_Help_Topic_Tag" Member="tbl_Help_Topic" ThisKey="Help_Topic_ID" OtherKey="Help_Topic_ID" Type="tbl_Help_Topic" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.tbl_Help_Category" Member="tbl_Help_Categories">
     <Type Name="tbl_Help_Category">
-      <Column Name="Help_Category_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Help_Category_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Help_Category_Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Help_Category_Order" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Help_Category_Parent_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
@@ -12,7 +20,7 @@
   </Table>
   <Table Name="dbo.tbl_Help_Topic" Member="tbl_Help_Topics">
     <Type Name="tbl_Help_Topic">
-      <Column Name="Help_Topic_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Help_Topic_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Help_Topic_Header" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="Help_Topic_Text" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="Help_Category_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -23,27 +31,19 @@
       <Column Name="Help_Topic_Logged_Out_Available" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="Help_Topic_Likes" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Help_Topic_Dislikes" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tbl_Help_Topic_tbl_Help_Topic_Tag" Member="tbl_Help_Topic_Tags" ThisKey="Help_Topic_ID" OtherKey="Help_Topic_ID" Type="tbl_Help_Topic_Tag" />
       <Association Name="tbl_Help_Topic_tbl_Help_Topic_Related" Member="tbl_Help_Topic_Relateds" ThisKey="Help_Topic_ID" OtherKey="Help_Topic_ID_First" Type="tbl_Help_Topic_Related" />
       <Association Name="tbl_Help_Topic_tbl_Help_Topic_Related1" Member="tbl_Help_Topic_Relateds1" ThisKey="Help_Topic_ID" OtherKey="Help_Topic_ID_Second" Type="tbl_Help_Topic_Related" />
-      <Association Name="tbl_Help_Topic_tbl_Help_Topic_Tag" Member="tbl_Help_Topic_Tags" ThisKey="Help_Topic_ID" OtherKey="Help_Topic_ID" Type="tbl_Help_Topic_Tag" />
       <Association Name="tbl_Help_Category_tbl_Help_Topic" Member="tbl_Help_Category" ThisKey="Help_Category_ID" OtherKey="Help_Category_ID" Type="tbl_Help_Category" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_Help_Topic_Related" Member="tbl_Help_Topic_Relateds">
     <Type Name="tbl_Help_Topic_Related">
-      <Column Name="Help_Topic_Related_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Help_Topic_Related_ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Help_Topic_ID_First" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Help_Topic_ID_Second" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="tbl_Help_Topic_tbl_Help_Topic_Related" Member="tbl_Help_Topic" ThisKey="Help_Topic_ID_First" OtherKey="Help_Topic_ID" Type="tbl_Help_Topic" IsForeignKey="true" />
       <Association Name="tbl_Help_Topic_tbl_Help_Topic_Related1" Member="tbl_Help_Topic1" ThisKey="Help_Topic_ID_Second" OtherKey="Help_Topic_ID" Type="tbl_Help_Topic" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.tbl_Help_Topic_Tag" Member="tbl_Help_Topic_Tags">
-    <Type Name="tbl_Help_Topic_Tag">
-      <Column Name="Help_Topic_Tag_ID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Help_Topic_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Help_Topic_Tag_Text" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Association Name="tbl_Help_Topic_tbl_Help_Topic_Tag" Member="tbl_Help_Topic" ThisKey="Help_Topic_ID" OtherKey="Help_Topic_ID" Type="tbl_Help_Topic" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
