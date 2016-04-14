@@ -13,8 +13,6 @@ namespace BootStrapTest.Admin.HelpCategory
             // Bind the repeater
             rptCategories.DataSource = helper.GetHelpCategories(db);
             rptCategories.DataBind();
-
-           
         }
 
         protected void rptCategories_ItemDataBound(object sender, RepeaterItemEventArgs e)

@@ -81,11 +81,11 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-9">
-                        <button class="btn btn-primary">Add New Category</button>
+                        <button class="btn btn-primary" onclick="location.href='../../Admin/HelpCategory/Form.aspx?id=-1'">Add New Category</button>
                         <button class="btn btn-danger">Delete Selected</button>
                         <br />
                         <br />
-                        <table id="catList" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <table id="catList" class="table table-striped table-bordered table-hover" style="cursor: pointer;" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -98,7 +98,8 @@
                             <tbody>
                                 <asp:Repeater ID="rptCategories" runat="server" OnItemDataBound="rptCategories_ItemDataBound">
                                     <ItemTemplate>
-                                        <tr>
+                                        <tr onclick="location.href='../../Admin/HelpCategory/Form.aspx?id=<%# Eval("Help_Category_ID")  %>'"
+                                            onmouseover="$(this).css('cursor', 'pointer')" >
                                             <td><%# Eval("Help_Category_ID")  %></td>
                                             <td><%# Eval("Help_Category_Name")  %></td>
                                             <td><%# Eval("Help_Category_Order")  %></td>
