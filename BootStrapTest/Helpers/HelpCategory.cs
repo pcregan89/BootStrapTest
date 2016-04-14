@@ -36,7 +36,6 @@ namespace BootStrapTest.Helpers
                 cat.Help_Category_Parent_ID = parent;
             cat.Help_Category_Logged_Out_Available = loggedOut;
 
-
             db.SubmitChanges();
 
             return cat.Help_Category_ID;
