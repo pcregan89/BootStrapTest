@@ -11,6 +11,7 @@ namespace BootStrapTest.Admin.HelpCategory
         protected void Page_Load(object sender, EventArgs e)
         {
             // Bind the repeater
+            Repeater rptCategories = (Repeater)Page.FindControl("rptCategories");
             rptCategories.DataSource = helper.GetHelpCategories(db);
             rptCategories.DataBind();
         }
@@ -25,6 +26,23 @@ namespace BootStrapTest.Admin.HelpCategory
                     Label lblCatParent = (Label)e.Item.FindControl("lblCatParent");
                     lblCatParent.Text = helper.GetHelpCategory(db, cat.Help_Category_Parent_ID.Value).Help_Category_Name;
                 }
+            }
+        }
+
+        protected void btnDelete_Click(object sender, EventArgs e)
+        {
+            int no = 0;
+            Repeater rptCategories = (Repeater)Page.FindControl("rptCategories");
+            foreach (RepeaterItem item in rptCategories.Items)
+            {
+                CheckBox del = (CheckBox)item.FindControl("ckDelete");
+
+                if (del.Checked == true)
+                {
+                    tbl_Help_Category cat = (tbl_Help_Category)rptCategories.Items[no].DataItem;
+                    helper.DeleteHelpCategory(db, cat.Help_Category_ID);
+                }
+                no++;
             }
         }
     }

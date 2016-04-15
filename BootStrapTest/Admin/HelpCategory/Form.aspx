@@ -62,7 +62,7 @@
     <div class="container" style="width: 100%;">
         <!-- Example row of columns -->
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-3" style="min-height:500px">
                 <ul class="list-group product-category-all">
                     <li class="list-group-item">
                         <a href="#">Help Categories</a>
@@ -80,16 +80,36 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-9">
-                        <asp:Label ID="lblHead" runat="server"></asp:Label>
+                        <asp:Label ID="lblHead" runat="server" CssClass="h3"></asp:Label><br /><br />
                     </div>
                     <form runat="server">
                           <div class="form-group">
-                                <asp:Label ID="lblID" runat="server">Category ID: </asp:Label>
+                                <asp:Label ID="lblID" runat="server" style="font-weight:bold;">Category ID: </asp:Label>
                           </div>
                           <div class="form-group">
-                                <label>Category Name</label>
+                                <label>Category Name</label><br />
                                 <asp:TextBox ID="txtName" runat="server"></asp:TextBox>
                           </div>
+                            <div class="form-group">
+                                <label>Order</label><br />
+                                <asp:TextBox ID="txtOrder" runat="server"></asp:TextBox>
+                          </div>
+                        <div class="form-group">
+                                <label>Parent Category</label><br />
+                                <%--<asp:TextBox ID="txtParent" runat="server"></asp:TextBox>--%>
+                            <asp:DropDownList ID="ddlParent" runat="server"></asp:DropDownList>
+                          </div>
+                        <div class="form-group">
+                                <label>Available When Logged Out</label><br />
+                                <asp:RadioButtonList ID="rbLoggedOut" runat="server">
+                                    <asp:ListItem>True</asp:ListItem>
+                                    <asp:ListItem>False</asp:ListItem>
+                                </asp:RadioButtonList>
+                          </div>
+                        <%--<button id="btnSubmit" class="btn btn-primary">Submit</button>--%>
+                        <asp:Button ID="btnSubmit" runat="server" Text="Submit" OnClick="btnSubmit_Click" CssClass="btn btn-primary" />
+                        <button id="btnCancel" class="btn btn-default">Cancel</button>
+                        <asp:Label runat="server" ID="lblWarning"></asp:Label>
                     </form>
                 </div>
             </div>
