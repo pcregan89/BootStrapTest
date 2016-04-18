@@ -20,6 +20,12 @@ namespace BootStrapTest.Helpers
             return list.ToList();
         }
 
+        //Get all Topics
+        public IEnumerable<tbl_Help_Topic> GetHelpTopics(dbDataContext db)
+        {
+            return db.tbl_Help_Topics;
+        }
+
         //Add or edit topic
         public int AddUpdateHelpTopic(dbDataContext db, int id, string header, string text, int cat, bool loggedOut, int priority)
         {

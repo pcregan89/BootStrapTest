@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace BootStrapTest.Admin.HelpCategory
@@ -11,7 +12,7 @@ namespace BootStrapTest.Admin.HelpCategory
         protected void Page_Load(object sender, EventArgs e)
         {
             // Bind the repeater
-            Repeater rptCategories = (Repeater)Page.FindControl("rptCategories");
+            Repeater rptCategories = (Repeater)Master.FindControl("ContentPlaceHolder1").FindControl("rptCategories");
             rptCategories.DataSource = helper.GetHelpCategories(db);
             rptCategories.DataBind();
         }
@@ -32,7 +33,7 @@ namespace BootStrapTest.Admin.HelpCategory
         protected void btnDelete_Click(object sender, EventArgs e)
         {
             int no = 0;
-            Repeater rptCategories = (Repeater)Page.FindControl("rptCategories");
+            Repeater rptCategories = (Repeater)Master.FindControl("ContentPlaceHolder1").FindControl("rptCategories");
             foreach (RepeaterItem item in rptCategories.Items)
             {
                 CheckBox del = (CheckBox)item.FindControl("ckDelete");
