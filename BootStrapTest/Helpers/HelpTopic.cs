@@ -13,6 +13,11 @@ namespace BootStrapTest.Helpers
             return db.tbl_Help_Topics.Single(t => t.Help_Topic_ID == id);
         }
 
+        public IEnumerable<tbl_Help_Topic> GetHelpTopics(dbDataContext db)
+        {
+            return db.tbl_Help_Topics;
+        }
+
         //Get all Topics for category ID
         public List<tbl_Help_Topic> GetHelpTopicCategory(dbDataContext db, int id)
         {
@@ -21,7 +26,7 @@ namespace BootStrapTest.Helpers
         }
 
         //Add or edit topic
-        public int AddUpdateHelpTopic(dbDataContext db, int id, string header, string text, int cat, bool loggedOut, int priority)
+        public int AddUpdateHelpTopic(dbDataContext db, int id, string header, string text, int cat, bool loggedOut)
         {
             tbl_Help_Topic topic;
             if (id > 0)
@@ -38,24 +43,21 @@ namespace BootStrapTest.Helpers
                 topic.Help_Topic_Text = text;
             if (cat != 0)
                 topic.Help_Category_ID = cat;
-            if (priority != 0)
-                topic.Help_Topic_Priority = priority;
             topic.Help_Topic_Logged_Out_Available = loggedOut;
 
             //Default values
-            topic.Help_Topic_Dislikes = 0;
-            topic.Help_Topic_Last_Updated = DateTime.Now;
-            topic.Help_Topic_Likes = 0;
-            topic.Help_Topic_Share_Count = 0;
-            topic.Help_Topic_View_Count = 0;
+            if (id <= 0)
+            {
+                topic.Help_Topic_Dislikes = 0; 
+                topic.Help_Topic_Likes = 0;
+                topic.Help_Topic_Share_Count = 0;
+                topic.Help_Topic_View_Count = 0;
+            }
                         
-            //Get new ID
-            if (id == 0)
-                id = db.tbl_Help_Topics.Last().Help_Topic_ID + 1;
-
+            topic.Help_Topic_Last_Updated = DateTime.Now;
             db.SubmitChanges();
 
-            if (db.GetChangeSet().Updates.Contains(topic))
+            if (db.GetChangeSet() != null)
                 return id;
             else
                 return -1;
