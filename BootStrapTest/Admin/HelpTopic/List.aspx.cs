@@ -31,5 +31,10 @@ namespace BootStrapTest.Admin.HelpTopic
                 lblCatParent.Text = helperCat.GetHelpCategory(db, cat.Help_Category_ID).Help_Category_Name;
             }
         }
+
+        protected void deleteButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
