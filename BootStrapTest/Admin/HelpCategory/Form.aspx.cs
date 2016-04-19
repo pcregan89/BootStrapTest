@@ -15,7 +15,7 @@ namespace BootStrapTest.Admin.HelpCategory
             if (HttpContext.Current.Request.QueryString.Get("id") != null)
                 id = Convert.ToInt32(HttpContext.Current.Request.QueryString.Get("id"));
             else
-                id = 5;
+                id = -1;
 
             if (!IsPostBack)
             {
@@ -32,10 +32,13 @@ namespace BootStrapTest.Admin.HelpCategory
                 lblID.Text = "Category ID: " + id;
 
                 tbl_Help_Category cat;
-                if (id == -1)
+                if (id == -1 || helper.GetHelpCategory(db, id) == null)
                 {
+                    id = -1;
                     lblHead.Text = "Add Help Category";
                     cat = new tbl_Help_Category();
+                    Button btnDelete = (Button)Master.FindControl("ContentPlaceHolder1").FindControl("btnDelete");
+                    btnDelete.Visible = false;
                 }
                 else
                 {
@@ -73,12 +76,31 @@ namespace BootStrapTest.Admin.HelpCategory
                 lblWarning.Text = "Could not save record";
             else
             {
+                string msg = "";
                 if (id == -1)
-                    lblWarning.Text = "Record added";
+                    msg = "Record added";
                 else
-                    lblWarning.Text = "Record updated";
+                    msg = "Record updated";
+
+                Response.Redirect("../HelpCategory/List.aspx?msg=" + msg);
             }
 
+        }
+
+        protected void btnDelete_Click(object sender, EventArgs e)
+        {
+            bool del;
+            del = helper.DeleteHelpCategory(db, id);
+
+            if (del)
+                Response.Redirect("../HelpCategory/List.aspx?msg=Record Deleted");
+            else
+                lblWarning.Text = "Could not delete record";
+        }
+
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("../HelpCategory/List.aspx");
         }
     }
 }

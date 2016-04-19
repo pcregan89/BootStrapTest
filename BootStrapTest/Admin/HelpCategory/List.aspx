@@ -4,7 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:Label ID="lblHead" runat="server" CssClass="h3">Help Category List</asp:Label><br /><br />
-    <button class="btn btn-primary" onclick="location.href='../../Admin/HelpCategory/Form.aspx?id=-1'">Add New Category</button>
+    <asp:Button ID="btnAdd" CssClass="btn btn-primary" runat="server" OnClick="btnAdd_Click" Text="Add New Category" />
     <asp:Button ID="btnDelete" CssClass="btn btn-danger" runat="server" OnClick="btnDelete_Click" Text="Delete Selected" />
     <br />
     <br />
@@ -44,6 +44,7 @@
                     </tr>
                 </ItemTemplate>
             </asp:Repeater>
+            <asp:Label ID="lblWarning" runat="server"></asp:Label>
         </tbody>
     </table>
 </asp:Content>

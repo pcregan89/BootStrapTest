@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -11,6 +12,12 @@ namespace BootStrapTest.Admin.HelpCategory
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            Label lblWarning = (Label)Master.FindControl("ContentPlaceHolder1").FindControl("lblWarning");
+            if (HttpContext.Current.Request.QueryString.Get("msg") != null)
+                lblWarning.Text = HttpContext.Current.Request.QueryString.Get("msg").ToString();
+            else
+                lblWarning.Text = "";
+
             // Bind the repeater
             Repeater rptCategories = (Repeater)Master.FindControl("ContentPlaceHolder1").FindControl("rptCategories");
             rptCategories.DataSource = helper.GetHelpCategories(db);
@@ -34,6 +41,7 @@ namespace BootStrapTest.Admin.HelpCategory
         {
             int no = 0;
             Repeater rptCategories = (Repeater)Master.FindControl("ContentPlaceHolder1").FindControl("rptCategories");
+
             foreach (RepeaterItem item in rptCategories.Items)
             {
                 CheckBox del = (CheckBox)item.FindControl("ckDelete");
@@ -45,6 +53,14 @@ namespace BootStrapTest.Admin.HelpCategory
                 }
                 no++;
             }
+
+            Label lblWarning = (Label)Master.FindControl("ContentPlaceHolder1").FindControl("lblWarning");
+            lblWarning.Text = "Item deleted";
+        }
+
+        protected void btnAdd_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("../../Admin/HelpCategory/Form.aspx?id=-1");
         }
     }
 }

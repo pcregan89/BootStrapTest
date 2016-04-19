@@ -10,7 +10,14 @@ namespace BootStrapTest.Helpers
         //Get help category based on category ID
         public tbl_Help_Category GetHelpCategory(dbDataContext db, int id)
         {
-            return db.tbl_Help_Categories.Single(t => t.Help_Category_ID == id);
+            try
+            {
+                return db.tbl_Help_Categories.Single(t => t.Help_Category_ID == id);
+            }
+            catch (InvalidOperationException)
+            {
+                return null;
+            }
         }
 
         public IEnumerable<tbl_Help_Category> GetHelpCategories(dbDataContext db)

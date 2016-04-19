@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="AdminMaster.master.cs" Inherits="BootStrapTest.AdminMaster" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MainMaster.master.cs" Inherits="BootStrapTest.MainMaster" %>
 
 <!DOCTYPE html>
 
@@ -61,22 +61,7 @@
         <div class="row">
             <div class="col-md-3">
                 <ul class="list-group product-category-all">
-                    <li class="list-group-item"><span class="badge">
-                        <i class="fa fa-angle-right icon-data fa-fw"></i></span>
-                        <a href="../../Admin/HelpCategory/List.aspx">Help Categories</a>
-                    </li>
-                    <li class="list-group-item"><span class="badge">
-                        <i class="fa fa-angle-right icon-data fa-fw"></i></span>
-                        <a href="../../Admin/HelpTopic/List.aspx">Help Topics</a>
-                    </li>
-                    <li class="list-group-item"><span class="badge">
-                        <i class="fa fa-angle-right icon-data fa-fw"></i></span>
-                        <a href="#">Help Topic Tags</a>
-                    </li>
-                    <li class="list-group-item"><span class="badge">
-                        <i class="fa fa-angle-right icon-data fa-fw"></i></span>
-                        <a href="#">Related Topics</a>
-                    </li>
+                    <!--Add Help Category Repeater Here-->
                 </ul>
             </div>
             <div class="container">
