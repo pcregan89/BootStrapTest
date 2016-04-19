@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -21,7 +21,7 @@ namespace BootStrapTest.Admin.HelpTopic
 
         protected void rptHelpTopic_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
-            
+
 
             if (e.Item.DataItem != null)
             {
@@ -30,6 +30,11 @@ namespace BootStrapTest.Admin.HelpTopic
                 Label lblCatParent = (Label)e.Item.FindControl("lblCatParent");
                 lblCatParent.Text = helperCat.GetHelpCategory(db, cat.Help_Category_ID).Help_Category_Name;
             }
+        }
+
+        protected void deleteButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

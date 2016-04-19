@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="List.aspx.cs" Inherits="BootStrapTest.Admin.HelpTopic.List" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="List.aspx.cs" Inherits="BootStrapTest.Admin.HelpTopic.List" %>
 
 
 <!DOCTYPE html>
@@ -12,16 +12,19 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <body>
-
+<form id="list" runat="server">
     <div class="container">
+        
         <h2>List of Help Topics</h2>
-        <button type="button" class="btn btn-primary">Add New</button>
+        <button type="button" class="btn btn-primary" onclick="javascript:window:location.href='../../Admin/HelpTopic/form.aspx?id=-1'; return false;">Add New</button>
+        <asp:button id="deleteButton" class="btn btn-danger" runat="server" OnClick="deleteButton_Click" Text="Delete"></asp:button>
         <table class="table table-hover">
             <asp:Repeater ID="rptHelpTopic" runat="server" OnItemDataBound="rptHelpTopic_ItemDataBound">
 
                 <HeaderTemplate>
                     <thead>
                         <tr>
+                            <th>Select</th>
                             <th>Category</th>
                             <th>Title</th>
                             <th>Text</th>
@@ -32,7 +35,7 @@
                             <th>Logged Out Available</th>
                             <th>Likes</th>
                             <th>Dislikes</th>
-
+                            <th>Edit</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -40,6 +43,7 @@
 
                 <ItemTemplate>
                     <tr>
+                        <td><input type="checkbox" /></td>
                         <td>
                             <asp:Label runat="server" ID="lblCatParent" Text='<%# Eval("Help_Category_ID") %>' /></td>
                         <td><%# Eval("Help_Topic_Header") %></td>
@@ -52,6 +56,7 @@
                         <td><%# Eval("Help_Topic_Logged_Out_Available") %></td>
                         <td><%# Eval("Help_Topic_Likes") %></td>
                         <td><%# Eval("Help_Topic_Dislikes") %></td>
+                        <td><button id="editButton" onclick="javascript:window.location.href='../../Admin/HelpTopic/Form.aspx?id=<%# Eval("Help_Topic_ID")  %>'; return false;">Edit</button></td>
                     </tr>
                 </ItemTemplate>
             </asp:Repeater>
