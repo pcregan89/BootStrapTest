@@ -29,6 +29,13 @@
   <label><input runat="server" id="availableLoggedOut" type="checkbox" value="" />Available Logged Out</label>
 </div>
   </fieldset>
+
+       <fieldset class="form-group">
+           <label>Priority</label>
+           <asp:DropDownList runat="server" id="ddlPriority" class="form-control" required>
+            </asp:DropDownList>
+
+       </fieldset>
        
   <fieldset class="form-group">
     <label for="exampleInputEmail1">Help Topic Title</label>

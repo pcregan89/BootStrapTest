@@ -12,11 +12,21 @@ namespace BootStrapTest.Admin.HelpTopic
         Helpers.HelpTopic helper = new Helpers.HelpTopic();
         Helpers.HelpCategory helperCat = new Helpers.HelpCategory();
         dbDataContext db = new dbDataContext();
+        List<int> deleteItems;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            rptHelpTopic.DataSource = helper.GetHelpTopics(db);
-            rptHelpTopic.DataBind();
+            if (!Page.IsPostBack)
+            {
+                rptHelpTopic.DataSource = helper.GetHelpTopics(db);
+                rptHelpTopic.DataBind();
+                
+            }
+
+            if (HttpContext.Current.Session["deleteItems"] != null)
+                deleteItems = (List<int>)HttpContext.Current.Session["deleteItems"];
+            else
+                deleteItems = new List<int>();
         }
 
         protected void rptHelpTopic_ItemDataBound(object sender, RepeaterItemEventArgs e)
@@ -26,14 +36,54 @@ namespace BootStrapTest.Admin.HelpTopic
             if (e.Item.DataItem != null)
             {
                 tbl_Help_Topic cat = (tbl_Help_Topic)e.Item.DataItem;
+                CheckBox checkbox = e.Item.FindControl("selectedRow") as CheckBox;
 
                 Label lblCatParent = (Label)e.Item.FindControl("lblCatParent");
                 lblCatParent.Text = helperCat.GetHelpCategory(db, cat.Help_Category_ID).Help_Category_Name;
+
+                checkbox.InputAttributes.Add("Value", cat.Help_Topic_ID.ToString());
+                checkbox.CheckedChanged += new EventHandler(selected_CheckedChanged);
+
+                Label priority = (Label)e.Item.FindControl("lblPriority");
+                if (!cat.Help_Topic_Priority.HasValue)
+                {
+                    priority.Text = "None";
+                }
             }
         }
 
         protected void deleteButton_Click(object sender, EventArgs e)
         {
+            bool? deleted = null;
+            int deletedCount = deleteItems.Count;
+
+            foreach(int item in deleteItems)
+            {
+                deleted = helper.DeleteHelpTopic(db, item);
+            }
+
+            HttpContext.Current.Session["deleteItems"] = null;
+            Server.TransferRequest(Request.Url.AbsolutePath, false);
+        }
+
+        protected void selected_CheckedChanged(object sender, EventArgs e)
+        {
+                CheckBox item = sender as CheckBox;
+                int topicID = Convert.ToInt32(item.InputAttributes["Value"].ToString());
+
+                if (item.Checked)
+                {
+                    
+                    if (!deleteItems.Contains(topicID))
+                        deleteItems.Add(topicID);
+                }
+                else
+                {
+                    if (deleteItems.Contains(topicID))
+                        deleteItems.Remove(topicID);
+                }
+
+                HttpContext.Current.Session["deleteItems"] = deleteItems;
 
         }
     }

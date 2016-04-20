@@ -7,13 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BootStrapTest.Admin.HelpTopic
-{
-
-
-    public partial class Form
-    {
-
+namespace BootStrapTest.Admin.HelpTopic {
+    
+    
+    public partial class Form {
+        
         /// <summary>
         /// heading control.
         /// </summary>
@@ -22,7 +20,7 @@ namespace BootStrapTest.Admin.HelpTopic
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label heading;
-
+        
         /// <summary>
         /// helpTopicCategory control.
         /// </summary>
@@ -31,7 +29,7 @@ namespace BootStrapTest.Admin.HelpTopic
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList helpTopicCategory;
-
+        
         /// <summary>
         /// availableLoggedOut control.
         /// </summary>
@@ -40,7 +38,16 @@ namespace BootStrapTest.Admin.HelpTopic
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox availableLoggedOut;
-
+        
+        /// <summary>
+        /// ddlPriority control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlPriority;
+        
         /// <summary>
         /// helpTopicTitle control.
         /// </summary>
@@ -49,7 +56,7 @@ namespace BootStrapTest.Admin.HelpTopic
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox helpTopicTitle;
-
+        
         /// <summary>
         /// helpTopicText control.
         /// </summary>
@@ -58,7 +65,7 @@ namespace BootStrapTest.Admin.HelpTopic
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox helpTopicText;
-
+        
         /// <summary>
         /// submitButton control.
         /// </summary>
@@ -67,7 +74,7 @@ namespace BootStrapTest.Admin.HelpTopic
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button submitButton;
-
+        
         /// <summary>
         /// result control.
         /// </summary>

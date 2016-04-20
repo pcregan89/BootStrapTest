@@ -35,16 +35,27 @@ namespace BootStrapTest.Admin.HelpTopic
 
                 if (topicID > 0)
                 {
-                    heading.Text = "Update Help Topic";
-                    tht = helper.GetHelpTopic(db, topicID);
+                    try
+                    {
+                        heading.Text = "Update Help Topic";
+                        tht = helper.GetHelpTopic(db, topicID);
 
-                    helpTopicText.Text = tht.Help_Topic_Text;
-                    helpTopicTitle.Text = tht.Help_Topic_Header;
+                        helpTopicText.Text = tht.Help_Topic_Text;
+                        helpTopicTitle.Text = tht.Help_Topic_Header;
 
-                    if (tht.Help_Topic_Logged_Out_Available)
-                        availableLoggedOut.Checked = true;
+                        if (tht.Help_Topic_Logged_Out_Available)
+                            availableLoggedOut.Checked = true;
 
-                    helpTopicCategory.Items.FindByValue(tht.Help_Category_ID.ToString());
+                        helpTopicCategory.Items.FindByValue(tht.Help_Category_ID.ToString()).Selected = true;
+                    }
+                    catch(InvalidOperationException)
+                    {
+                        heading.Text = "Invalid help topic";
+                        result.Text = "Invalid help topic";
+                        result.CssClass = "bg-danger";
+                    }
+                    
+                    
                 }
                 else
                 {
