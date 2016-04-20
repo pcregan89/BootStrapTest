@@ -8,7 +8,7 @@
     <asp:Button ID="btnDelete" CssClass="btn btn-danger" runat="server" OnClick="btnDelete_Click" Text="Delete Selected" />
     <br />
     <br />
-    <table id="catList" class="table table-striped table-bordered table-hover" style="cursor: pointer;" cellspacing="0" width="100%">
+    <table id="catList" class="table table-striped table-bordered table-hover" style="cursor: pointer;">
         <thead>
             <tr>
                 <th></th>
@@ -17,6 +17,7 @@
                 <th>Order</th>
                 <th>Parent</th>
                 <th>Logged Out Available</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -26,21 +27,17 @@
                         <td>
                             <asp:CheckBox ID="ckDelete" runat="server"></asp:CheckBox>
                         </td>
-                        <td onclick="location.href='../../Admin/HelpCategory/Form.aspx?id=<%# Eval("Help_Category_ID")  %>'"
-                            onmouseover="$(this).css('cursor', 'pointer')">
-                            <%# Eval("Help_Category_ID") %></td>
-                        <td onclick="location.href='../../Admin/HelpCategory/Form.aspx?id=<%# Eval("Help_Category_ID")  %>'"
-                            onmouseover="$(this).css('cursor', 'pointer')">
-                            <%# Eval("Help_Category_Name") %></td>
-                        <td onclick="location.href='../../Admin/HelpCategory/Form.aspx?id=<%# Eval("Help_Category_ID")  %>'"
-                            onmouseover="$(this).css('cursor', 'pointer')">
-                            <%# Eval("Help_Category_Order") %></td>
-                        <td onclick="location.href='../../Admin/HelpCategory/Form.aspx?id=<%# Eval("Help_Category_ID")  %>'"
-                            onmouseover="$(this).css('cursor', 'pointer')">
-                            <asp:Label ID="lblCatParent" runat="server" /></td>
-                        <td onclick="location.href='../../Admin/HelpCategory/Form.aspx?id=<%# Eval("Help_Category_ID")  %>'"
-                            onmouseover="$(this).css('cursor', 'pointer')">
-                            <%# Eval("Help_Category_Logged_Out_Available") %></td>
+                        <td> <%# Eval("Help_Category_ID") %></td>
+                        <td> <%# Eval("Help_Category_Name") %></td>
+                        <td> <%# Eval("Help_Category_Order") %></td>
+                        <td> <asp:Label ID="lblCatParent" runat="server" /></td>
+                        <td> <%# Eval("Help_Category_Logged_Out_Available") %></td>
+                        <td>
+                            <button type="button" class="btn btn-default btn-xs" onclick="location.href='../../Admin/HelpCategory/Form.aspx?id=<%# Eval("Help_Category_ID")  %>'">
+                                <i class="fa fa-external-link"></i> View</button>
+                            <button type="button" class="btn btn-default btn-xs">
+                                <i class="fa fa-trash-o"></i> Delete</button>
+                        </td>
                     </tr>
                 </ItemTemplate>
             </asp:Repeater>
