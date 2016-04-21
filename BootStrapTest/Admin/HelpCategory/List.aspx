@@ -4,11 +4,13 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:Label ID="lblHead" runat="server" CssClass="h3">Help Category List</asp:Label><br /><br />
-    <asp:Button ID="btnAdd" CssClass="btn btn-primary" runat="server" OnClick="btnAdd_Click" Text="Add New Category" />
-    <asp:Button ID="btnDelete" CssClass="btn btn-danger" runat="server" OnClick="btnDelete_Click" Text="Delete Selected" />
+    <button type="button" runat="server" class="btn btn-primary" onserverclick="btnAdd_Click">
+            <i class="fa fa-plus"></i> Add New Category</button>
+    <button type="button" runat="server" class="btn btn-danger" onserverclick="btnDelete_Click">
+            <i class="fa fa-trash-o"></i> Delete Selected</button>
     <br />
     <br />
-    <table id="catList" class="table table-striped table-bordered table-hover" style="cursor: pointer;">
+    <table id="catList" class="table table-striped table-bordered table-hover">
         <thead>
             <tr>
                 <th></th>
@@ -27,7 +29,7 @@
                         <td>
                             <asp:CheckBox ID="ckDelete" runat="server"></asp:CheckBox>
                         </td>
-                        <td> <%# Eval("Help_Category_ID") %></td>
+                        <td> <asp:Label ID="lblID" runat="server" Text='<%# Eval("Help_Category_ID") %>'></asp:Label></td>
                         <td> <%# Eval("Help_Category_Name") %></td>
                         <td> <%# Eval("Help_Category_Order") %></td>
                         <td> <asp:Label ID="lblCatParent" runat="server" /></td>
@@ -35,8 +37,9 @@
                         <td>
                             <button type="button" class="btn btn-default btn-xs" onclick="location.href='../../Admin/HelpCategory/Form.aspx?id=<%# Eval("Help_Category_ID")  %>'">
                                 <i class="fa fa-external-link"></i> View</button>
-                            <button type="button" class="btn btn-default btn-xs">
-                                <i class="fa fa-trash-o"></i> Delete</button>
+                            <asp:LinkButton ID="btnRowDelete" runat="server" CssClass="btn btn-default btn-xs" OnClick="btnRowDelete_Click">
+                                <i class="fa fa-trash-o"></i> Delete
+                            </asp:LinkButton>
                         </td>
                     </tr>
                 </ItemTemplate>
