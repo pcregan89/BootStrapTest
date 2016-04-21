@@ -1,17 +1,6 @@
-<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Form.aspx.cs" Inherits="BootStrapTest.Admin.HelpTopic.Form" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Form.aspx.cs" Inherits="BootStrapTest.Admin.HelpTopic.Form" MasterPageFile="~/Master/AdminMaster.Master"%>
 
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Help Topic</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css">
-</head>
-<body>
-<div class="container">
-<form runat="server">
+<asp:Content ContentPlaceHolderId="ContentPlaceHolder1" runat="server">
         
    <div class="col-xs-8 col-xs-offset-1">
 
@@ -53,11 +42,4 @@
    <asp:Label ID="result" runat="server" Width="48%" Height="25px" style="text-align:center"></asp:Label>
    </div>
 
-    
-    
- </form>
- </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+</asp:Content>

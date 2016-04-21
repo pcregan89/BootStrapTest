@@ -13,6 +13,7 @@ namespace BootStrapTest.Admin.HelpTopic
         Helpers.HelpTopic helper = new Helpers.HelpTopic();
         Helpers.HelpCategory helperCat = new Helpers.HelpCategory();
         dbDataContext db = new dbDataContext();
+        List<int> helpPrioritiesUsed = new List<int>();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -21,16 +22,31 @@ namespace BootStrapTest.Admin.HelpTopic
             //don't reload the values when the button is clicked
             if (!Page.IsPostBack)
             {
-                foreach (tbl_Help_Category thc in helperCat.GetHelpCategories(db))
-                {
-                    helpTopicCategory.Items.Clear();
-                    helpTopicCategory.Items.Add("--Select--");
-                    ListItem li = new ListItem();
-                    li.Text = thc.Help_Category_Name;
-                    li.Value = thc.Help_Category_ID.ToString();
-                    helpTopicCategory.Items.Add(li);
+                helpTopicCategory.Items.Clear();
+                helpTopicCategory.Items.Add("--Select--");
 
+                ddlPriority.Items.Clear();
+                ddlPriority.Items.Add("--None--");
+
+                foreach (tbl_Help_Topic item in helper.GetHelpTopics(db))
+                {
+                    if (item.Help_Topic_Priority != 0)
+                    {
+                        helpPrioritiesUsed.Add(Convert.ToInt32(item.Help_Topic_Priority));
+                    }
                 }
+
+             
+
+                    foreach (tbl_Help_Category thc in helperCat.GetHelpCategories(db))
+                    {
+
+                        ListItem li = new ListItem();
+                        li.Text = thc.Help_Category_Name;
+                        li.Value = thc.Help_Category_ID.ToString();
+                        helpTopicCategory.Items.Add(li);
+
+                    }
 
 
                 if (topicID > 0)
@@ -47,6 +63,16 @@ namespace BootStrapTest.Admin.HelpTopic
                             availableLoggedOut.Checked = true;
 
                         helpTopicCategory.Items.FindByValue(tht.Help_Category_ID.ToString()).Selected = true;
+
+                        if (tht.Help_Topic_Priority != null)
+                        { 
+                            ListItem liCurrent = new ListItem();
+                            liCurrent.Text = tht.Help_Topic_Priority.ToString();
+                            liCurrent.Value = tht.Help_Topic_Priority.ToString();
+
+                            ddlPriority.Items.Add(liCurrent);
+                            ddlPriority.Items.FindByText(liCurrent.Text).Selected = true;
+                        }
                     }
                     catch(InvalidOperationException)
                     {
@@ -55,11 +81,23 @@ namespace BootStrapTest.Admin.HelpTopic
                         result.CssClass = "bg-danger";
                     }
                     
+                   
                     
                 }
                 else
                 {
                     heading.Text = "New Help Topic";
+                }
+
+                for (int x = 1; x <= 5; x++)
+                {
+                    if (!helpPrioritiesUsed.Contains(x))
+                    {
+                        ListItem lip = new ListItem();
+                        lip.Text = x.ToString();
+                        lip.Value = x.ToString();
+                        ddlPriority.Items.Add(lip);
+                    }
                 }
             }
 
@@ -70,14 +108,24 @@ namespace BootStrapTest.Admin.HelpTopic
             int category;
             string topicHeader, topicTitle;
             bool loggedOutAvailable;
+            int? topicPriority;
 
             if (helpTopicCategory.SelectedIndex > 0)
             {
 
                 category = Convert.ToInt32(helpTopicCategory.SelectedValue);
                 topicHeader = helpTopicTitle.Text.Trim();
-                topicTitle = helpTopicText.Text.Trim();
+                topicTitle = helpTopicText.Text;
                 loggedOutAvailable = availableLoggedOut.Checked;
+
+                if (ddlPriority.SelectedIndex > 0)
+                {
+                    topicPriority = Convert.ToInt32(ddlPriority.SelectedValue);
+                }
+                else
+                {
+                    topicPriority = 0;
+                }
             }
             else
             {
@@ -86,7 +134,7 @@ namespace BootStrapTest.Admin.HelpTopic
                 return;
             }
 
-            int submit = helper.AddUpdateHelpTopic(db, topicID, topicHeader, topicTitle, category, loggedOutAvailable);
+            int submit = helper.AddUpdateHelpTopic(db, topicID, topicHeader, topicTitle, category, loggedOutAvailable, topicPriority);
 
             if (submit == topicID)
             {
