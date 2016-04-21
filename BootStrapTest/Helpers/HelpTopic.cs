@@ -26,7 +26,7 @@ namespace BootStrapTest.Helpers
         }
 
         //Add or edit topic
-        public int AddUpdateHelpTopic(dbDataContext db, int id, string header, string text, int cat, bool loggedOut)
+        public int AddUpdateHelpTopic(dbDataContext db, int id, string header, string text, int cat, bool loggedOut, int? priority)
         {
             tbl_Help_Topic topic;
             if (id > 0)
@@ -43,7 +43,14 @@ namespace BootStrapTest.Helpers
                 topic.Help_Topic_Text = text;
             if (cat != 0)
                 topic.Help_Category_ID = cat;
+            if (priority != 0)
+                topic.Help_Topic_Priority = priority;
+            else
+                topic.Help_Topic_Priority = null;
             topic.Help_Topic_Logged_Out_Available = loggedOut;
+
+            
+
 
             //Default values
             if (id <= 0)
