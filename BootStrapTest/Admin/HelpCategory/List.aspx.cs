@@ -72,7 +72,7 @@ namespace BootStrapTest.Admin.HelpCategory
                 lblWarning.Text = "Record deleted";
             else
                 lblWarning.Text = "Records deleted";
-            
+    
             //Refresh Repeater data source
             rptCategories.DataSource = helper.GetHelpCategories(db);
             rptCategories.DataBind();
