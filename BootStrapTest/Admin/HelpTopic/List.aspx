@@ -2,15 +2,14 @@
 
 
 <asp:Content ContentPlaceHolderId="ContentPlaceHolder1" runat="server">
-    <div class="container">
-        
+        <asp:ScriptManager ID="scr" runat="server">
+        </asp:ScriptManager>
         <h2>List of Help Topics</h2>
         <button type="button" class="btn btn-primary" onclick="javascript:window:location.href='../../Admin/HelpTopic/form.aspx?id=-1'; return false;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Add New</button>
-        <button type="button" id="deleteButton" class="btn btn-danger" data-toggle="modal" data-target="#myModal"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
-        
+        <button type="button" id="deleteButton" class="btn btn-danger" data-toggle="modal" data-target="#dlModal"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
         <table class="table table-hover table-responsive" style="border-top:hidden;">
-            <asp:ScriptManager ID="scr" runat="server">
-        </asp:ScriptManager>
+            
+            
             <asp:Repeater ID="rptHelpTopic" runat="server" OnItemDataBound="rptHelpTopic_ItemDataBound" >
 
                 <HeaderTemplate>
@@ -67,9 +66,8 @@
                 </ItemTemplate>
             </asp:Repeater>
         </table>
-    </div>
 
-     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+     <div class="modal fade" id="dlModal" tabindex="-1" role="dialog" aria-labelledby="Delete Modal">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -84,6 +82,6 @@
         <asp:button type="button" class="btn btn-danger" runat="server" OnClick="deleteButton_Click" Text="Delete"></asp:button>
       </div>
     </div>
-  </div>
+      </div>
 </div>
 </asp:Content>

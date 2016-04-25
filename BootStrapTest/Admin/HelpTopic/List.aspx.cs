@@ -20,7 +20,6 @@ namespace BootStrapTest.Admin.HelpTopic
             {
                 rptHelpTopic.DataSource = helper.GetHelpTopics(db);
                 rptHelpTopic.DataBind();
-                
             }
 
             if (HttpContext.Current.Session["deleteItems"] != null)

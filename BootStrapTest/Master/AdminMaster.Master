@@ -94,6 +94,7 @@
 
             <hr>
         </div>
+     </div>
         <!-- /container -->
         <footer class="footer">
             <div class="container">
@@ -106,9 +107,8 @@
 	================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
         <%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>--%>
-        <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-        <script src="Scripts/jquery-1.12.2.min.js"></script>
-        <script src="Scripts/bootstrap.min.js"></script>
-        <script src="Scripts/SiteCode.js"></script>
+        <script src="<%= ResolveUrl("~/Scripts/jquery-1.12.2.min.js") %>"></script>
+        <script src="<%= ResolveUrl("~/Scripts/bootstrap.min.js") %>"></script>
+        <!--<script src="<%= ResolveUrl("~/Scripts/SiteCode.js")%>"></script>-->
 </body>
 </html>
