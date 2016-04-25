@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web;
 using System.Web.UI.WebControls;
 
@@ -117,11 +118,10 @@ namespace BootStrapTest.Admin.HelpCategory
                 //Determine whether record added or updated from ID
                 string msg = "";
                 if (id == -1)
-                    msg = "Record added";
+                    lblWarning.Text = "Record added";
                 else
-                    msg = "Record updated";
+                    Response.Redirect("../HelpCategory/List.aspx?msg=Record Updated");
 
-                lblWarning.Text = msg;
 
                 //If record added, clear form to allow new record
                 if (id == -1)
@@ -136,11 +136,23 @@ namespace BootStrapTest.Admin.HelpCategory
 
         protected void btnDelete_Click(object sender, EventArgs e)
         {
-            bool del;
-            del = helper.DeleteHelpCategory(db, id);
+            bool del = false, children = false;
+
+            //Check category has no children
+            List<tbl_Help_Category> child = helper.GetHelpCategoryChildren(db, id);
+
+            if (child == null)
+                del = helper.DeleteHelpCategory(db, id);
+            else
+            {
+                //children = true;
+                children = true;
+            }
 
             if (del)
                 Response.Redirect("../HelpCategory/List.aspx?msg=Record Deleted");
+            else if (children == true)
+                lblWarning.Text = "The record you selected (ID: " + id + ") has dependencies. Please check these before deleting.";
             else
                 lblWarning.Text = "Could not delete record";
         }

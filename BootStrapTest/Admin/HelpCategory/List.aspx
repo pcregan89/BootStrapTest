@@ -8,7 +8,7 @@
             <i class="fa fa-plus"></i> Add New Category</button>
     <button type="button" runat="server" class="btn btn-danger" onserverclick="btnDelete_Click">
             <i class="fa fa-trash-o"></i> Delete Selected</button>
-    <asp:Label ID="lblWarning" runat="server" ></asp:Label>
+    <asp:Label ID="lblWarning" runat="server"></asp:Label>
     <br /><br />
     <table id="catList" class="table table-striped table-bordered table-hover">
         <thead>

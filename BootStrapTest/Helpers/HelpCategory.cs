@@ -25,6 +25,13 @@ namespace BootStrapTest.Helpers
             return db.tbl_Help_Categories;
         }
 
+        //get Help category based on parent ID
+        public List<tbl_Help_Category> GetHelpCategoryChildren(dbDataContext db, int id)
+        {
+            IQueryable<tbl_Help_Category> list = db.tbl_Help_Categories.Where(t => t.Help_Category_Parent_ID == id);
+            return list.ToList();
+        }
+
         //Add or edit help category
         public int AddUpdateHelpCategory(dbDataContext db, int id, string name, int order, int parent, bool loggedOut)
         {
