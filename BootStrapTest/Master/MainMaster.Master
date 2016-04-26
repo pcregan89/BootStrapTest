@@ -15,11 +15,11 @@
     <nav class="navbar navbar-inverse navbar-top" style="margin-top: -50px;">
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#" style="color: #ffffff;">Help Centre</a>
+                <a href="#" style="color: #ffffff; font-size: 18px;"><img src="/Images/mcicon.jpg"/>  Help Centre</a></div>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <form class="navbar-form navbar-right">
-                    <!--<button type="submit" class="btn btn-primary">Sign in</button>-->
+                    <button type="submit" class="btn btn-primary">Sign in</button>
                 </form>
             </div>
             <!--/.navbar-collapse -->

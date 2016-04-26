@@ -57,7 +57,7 @@ namespace BootStrapTest.Admin.HelpCategory
 
         protected void btnDelete_Click(object sender, EventArgs e)
         {
-            int no = 0, count = 0;
+            int count = 0;
             string children = "";
             Repeater rptCategories = (Repeater)Master.FindControl("ContentPlaceHolder1").FindControl("rptCategories");
 
@@ -77,16 +77,14 @@ namespace BootStrapTest.Admin.HelpCategory
                     //Check category has no children
                     List <tbl_Help_Category> child = helper.GetHelpCategoryChildren(db, catID);
 
-                    if (child == null)
+                    if (child.Count == 0)
                         helper.DeleteHelpCategory(db, catID);
                     else
                         children += " " + catID + " ";
 
                     //Count records selected
                     count++;
-
                 }
-                no++;
             }
 
             //Check how many records were selected, adjust message accordingly.
@@ -110,7 +108,7 @@ namespace BootStrapTest.Admin.HelpCategory
             }
             else if (children.Length > 0)
             {
-                lblWarning.Text = "The following selected records have dependencies: " + children;
+                lblWarning.Text = "The following selected records may have dependencies: " + children;
                 lblWarning.CssClass = "text-danger";
                 lblWarning.Visible = true;
             }

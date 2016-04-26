@@ -203,6 +203,8 @@
       <LastGenOutput>db.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Images\favicon.ico" />
+    <Content Include="Images\mcicon.jpg" />
     <Content Include="Master\AdminMaster.Master" />
     <Content Include="Master\MainMaster.Master" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

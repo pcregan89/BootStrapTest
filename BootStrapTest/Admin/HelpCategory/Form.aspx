@@ -19,7 +19,6 @@
     </div>
     <div class="form-group">
         <label>Parent Category</label><br />
-        <%--<asp:TextBox ID="txtParent" runat="server"></asp:TextBox>--%>
         <asp:DropDownList ID="ddlParent" runat="server"></asp:DropDownList>
     </div>
     <div class="form-group">
@@ -29,9 +28,8 @@
             <asp:ListItem>False</asp:ListItem>
         </asp:RadioButtonList>
     </div>
-    <%--<button id="btnSubmit" class="btn btn-primary">Submit</button>--%>
     <asp:Button ID="btnSubmit" runat="server" Text="Submit" OnClick="btnSubmit_Click" CssClass="btn btn-primary" />
     <asp:Button ID="btnDelete" runat="server" Text="Delete" OnClick="btnDelete_Click" CssClass="btn btn-danger" />
-    <asp:Button ID="btnCancel" runat="server" Text="Cancel" OnClick="btnCancel_Click" CssClass="btn btn-default" />
+    <asp:Button ID="btnCancel" runat="server" Text="Back" OnClick="btnCancel_Click" CssClass="btn btn-default" />
     <asp:Label runat="server" ID="lblWarning"></asp:Label>
 </asp:Content>
