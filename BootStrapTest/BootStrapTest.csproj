@@ -204,6 +204,7 @@
       <LastGenOutput>db.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="HelpTopic.aspx" />
     <Content Include="Images\favicon.ico" />
     <Content Include="Images\mcicon.jpg" />
     <Content Include="Master\AdminMaster.Master" />
@@ -262,6 +263,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HelpTopic.aspx.cs">
+      <DependentUpon>HelpTopic.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HelpTopic.aspx.designer.cs">
+      <DependentUpon>HelpTopic.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Master\MainMaster.Master.cs">
       <DependentUpon>MainMaster.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

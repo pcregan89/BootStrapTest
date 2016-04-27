@@ -123,10 +123,6 @@ namespace BootStrapTest.Admin.HelpTopic
                 StringBuilder sb = new StringBuilder(
     HttpUtility.HtmlEncode(helpTopicText.Text));
 
-                String o = helpTopicText.Text;
-                String s = HttpUtility.HtmlEncode(helpTopicText.Text);
-                
-
                 // whitelist of html to allow
                 sb.Replace("&lt;strong&gt;", "<strong>");
                 sb.Replace("&lt;/strong&gt;", "</strong>");
@@ -150,9 +146,10 @@ namespace BootStrapTest.Admin.HelpTopic
                 sb.Replace("&lt;/li&gt;", "</li>");
                 sb.Replace("&lt;ul&gt;", "<ul>");
                 sb.Replace("&lt;/ul&gt;", "</ul>");
-                sb.Replace("&lt;hr&gt;", "<hr>");
-
-
+                sb.Replace("&lt;ol&gt;", "<ol>");
+                sb.Replace("&lt;/ol&gt;", "</ol>");
+                sb.Replace("&lt;spanl&gt;", "<span>");
+                sb.Replace("&lt;/spanl&gt;", "</span>");
 
                 topicTitle = sb.ToString();
                 

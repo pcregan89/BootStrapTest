@@ -65,7 +65,8 @@
                 ['insertImage'],
                 'btnGrp-lists',
                 ['removeformat'],
-            ]
+            ],
+            removeformatPasted: true
         });
     </script>
 </asp:Content>
