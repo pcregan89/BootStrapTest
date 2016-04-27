@@ -5,10 +5,10 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:Label ID="lblHead" runat="server" CssClass="h3">Help Category List</asp:Label><br /><br />
     <button type="button" runat="server" class="btn btn-primary" onserverclick="btnAdd_Click">
-            <i class="fa fa-plus"></i> Add New Category</button>
+            <i class="fa fa-pencil-square-o"></i> Add New Category</button>
     <button type="button" runat="server" class="btn btn-danger" onserverclick="btnDelete_Click">
             <i class="fa fa-trash-o"></i> Delete Selected</button>
-    <asp:Label ID="lblWarning" runat="server" ></asp:Label>
+    <asp:Label ID="lblWarning" runat="server"></asp:Label>
     <br /><br />
     <table id="catList" class="table table-striped table-bordered table-hover">
         <thead>

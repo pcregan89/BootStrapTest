@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web;
 using System.Web.UI.WebControls;
 
@@ -82,6 +83,9 @@ namespace BootStrapTest.Admin.HelpCategory
             else
                 parent = Convert.ToInt32(ddlParent.SelectedValue);
 
+            if (parent == id)
+                valid = false;
+
             //Check order
             int order = -1;
             if (txtOrder.Text.Length != 0)
@@ -97,7 +101,7 @@ namespace BootStrapTest.Admin.HelpCategory
             }
 
             //Check radio button selection
-            if (rbLoggedOut.SelectedValue == null)
+            if (rbLoggedOut.SelectedValue == "")
             {
                 valid = false;
             }
@@ -111,17 +115,24 @@ namespace BootStrapTest.Admin.HelpCategory
 
             //Check if record entered, display error message if not
             if (record == -1)
+            {
                 lblWarning.Text = "Could not save record";
+                lblWarning.CssClass = "text-danger";
+            }
             else
             {
                 //Determine whether record added or updated from ID
-                string msg = "";
                 if (id == -1)
-                    msg = "Record added";
+                {
+                    lblWarning.Text = "Record added";
+                    lblWarning.CssClass = "text-success";
+                }
                 else
-                    msg = "Record updated";
+                {
+                    lblWarning.Text = "Record updated";
+                    lblWarning.CssClass = "text-success";
+                }
 
-                lblWarning.Text = msg;
 
                 //If record added, clear form to allow new record
                 if (id == -1)
@@ -129,6 +140,16 @@ namespace BootStrapTest.Admin.HelpCategory
                     txtName.Text = "";
                     txtOrder.Text = "";
                     rbLoggedOut.ClearSelection();
+
+                    ddlParent.Items.Clear();
+                    ddlParent.Items.Add("--None--");
+                    foreach (tbl_Help_Category item in helper.GetHelpCategories(db))
+                    {
+                        ListItem list = new ListItem();
+                        list.Text = item.Help_Category_Name;
+                        list.Value = item.Help_Category_ID.ToString();
+                        ddlParent.Items.Add(list);
+                    }
                     ddlParent.SelectedIndex = 0;
                 }
             }
@@ -136,13 +157,31 @@ namespace BootStrapTest.Admin.HelpCategory
 
         protected void btnDelete_Click(object sender, EventArgs e)
         {
-            bool del;
-            del = helper.DeleteHelpCategory(db, id);
+            bool del = false, children = false;
+
+            //Check category has no children
+            List<tbl_Help_Category> child = helper.GetHelpCategoryChildren(db, id);
+
+            if (child == null)
+                del = helper.DeleteHelpCategory(db, id);
+            else
+            {
+                //children = true;
+                children = true;
+            }
 
             if (del)
                 Response.Redirect("../HelpCategory/List.aspx?msg=Record Deleted");
+            else if (children == true)
+            {
+                lblWarning.Text = "This record (ID: " + id + ") has dependencies. Please check these before deleting.";
+                lblWarning.CssClass = "text-danger";
+            }
             else
+            {
                 lblWarning.Text = "Could not delete record";
+                lblWarning.CssClass = "text-danger";
+            }
         }
 
         protected void btnCancel_Click(object sender, EventArgs e)
