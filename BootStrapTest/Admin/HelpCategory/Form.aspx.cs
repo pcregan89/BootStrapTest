@@ -69,11 +69,13 @@ namespace BootStrapTest.Admin.HelpCategory
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             bool valid = true;
+            string msg = "";
 
             //Validate name
             if (txtName.Text.Length <= 0 || txtName.Text.Length > 50)
             {
                 valid = false;
+                msg += "Name must be between 1 and 50 characters<br/>";
             }
 
             //Check parent ID
@@ -83,8 +85,11 @@ namespace BootStrapTest.Admin.HelpCategory
             else
                 parent = Convert.ToInt32(ddlParent.SelectedValue);
 
-            if (parent == id)
+            if (parent == id && id != -1)
+            {
                 valid = false;
+                msg += "Cannot select a category as it's own parent<br/>";
+            }
 
             //Check order
             int order = -1;
@@ -97,6 +102,7 @@ namespace BootStrapTest.Admin.HelpCategory
                 catch (FormatException)
                 {
                     valid = false;
+                    msg += "Order must be numeric<br/>";
                 }
             }
 
@@ -104,6 +110,7 @@ namespace BootStrapTest.Admin.HelpCategory
             if (rbLoggedOut.SelectedValue == "")
             {
                 valid = false;
+                msg += "You must select whether a category is available when a user is logged out";
             }
 
             //Add to database if valid
@@ -116,7 +123,7 @@ namespace BootStrapTest.Admin.HelpCategory
             //Check if record entered, display error message if not
             if (record == -1)
             {
-                lblWarning.Text = "Could not save record";
+                lblWarning.Text = msg;
                 lblWarning.CssClass = "text-danger";
             }
             else
@@ -124,13 +131,15 @@ namespace BootStrapTest.Admin.HelpCategory
                 //Determine whether record added or updated from ID
                 if (id == -1)
                 {
-                    lblWarning.Text = "Record added";
-                    lblWarning.CssClass = "text-success";
+                    Response.Redirect("../HelpCategory/List.aspx?msg=Record Added");
+                    //lblWarning.Text = "Record added";
+                    //lblWarning.CssClass = "text-success";
                 }
                 else
                 {
-                    lblWarning.Text = "Record updated";
-                    lblWarning.CssClass = "text-success";
+                    Response.Redirect("../HelpCategory/List.aspx?msg=Record Updated");
+                    //lblWarning.Text = "Record updated";
+                    //lblWarning.CssClass = "text-success";
                 }
 
 

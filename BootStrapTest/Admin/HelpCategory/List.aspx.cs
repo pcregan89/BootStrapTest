@@ -144,7 +144,7 @@ namespace BootStrapTest.Admin.HelpCategory
             //Check category has no children
             List<tbl_Help_Category> child = helper.GetHelpCategoryChildren(db, catID);
 
-            if (child == null)
+            if (child.Count == 0)
                 del = helper.DeleteHelpCategory(db, catID);
             else
                 children = true;
