@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -14,11 +15,11 @@ namespace BootStrapTest.Admin.HelpTopic
         Helpers.HelpCategory helperCat = new Helpers.HelpCategory();
         dbDataContext db = new dbDataContext();
         List<int> helpPrioritiesUsed = new List<int>();
+        tbl_Help_Topic tht;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            tbl_Help_Topic tht;
-
+            
             //don't reload the values when the button is clicked
             if (!Page.IsPostBack)
             {
@@ -73,12 +74,14 @@ namespace BootStrapTest.Admin.HelpTopic
                             ddlPriority.Items.Add(liCurrent);
                             ddlPriority.Items.FindByText(liCurrent.Text).Selected = true;
                         }
+                        
                     }
                     catch(InvalidOperationException)
                     {
                         heading.Text = "Invalid help topic";
                         result.Text = "Invalid help topic";
                         result.CssClass = "bg-danger";
+                        submitButton.Visible = false;
                     }
                     
                    
@@ -104,9 +107,10 @@ namespace BootStrapTest.Admin.HelpTopic
         }
 
         protected void submitButton_Click(object sender, EventArgs e)
+        
         {
             int category;
-            string topicHeader, topicTitle;
+            string topicHeader, topicTitle = "";
             bool loggedOutAvailable;
             int? topicPriority;
 
@@ -115,7 +119,44 @@ namespace BootStrapTest.Admin.HelpTopic
 
                 category = Convert.ToInt32(helpTopicCategory.SelectedValue);
                 topicHeader = helpTopicTitle.Text.Trim();
-                topicTitle = helpTopicText.Text;
+
+                StringBuilder sb = new StringBuilder(
+    HttpUtility.HtmlEncode(helpTopicText.Text));
+
+                String o = helpTopicText.Text;
+                String s = HttpUtility.HtmlEncode(helpTopicText.Text);
+                
+
+                // whitelist of html to allow
+                sb.Replace("&lt;strong&gt;", "<strong>");
+                sb.Replace("&lt;/strong&gt;", "</strong>");
+                sb.Replace("&lt;em&gt;", "<em>");
+                sb.Replace("&lt;/em&gt;", "</em>");
+                sb.Replace("&lt;p&gt;", "<p>");
+                sb.Replace("&quot;&gt;", "\">");
+                sb.Replace("&lt;/p&gt;", "</p>");
+                sb.Replace("&lt;br&gt;", "<br>");
+                sb.Replace("&lt;del&gt;", "<del>");
+                sb.Replace("&lt;/del&gt;", "</del>");
+                sb.Replace("&lt;sup&gt;", "<sup>");
+                sb.Replace("&lt;/sup&gt;", "</sup>");
+                sb.Replace("&lt;sub&gt;", "<sub>");
+                sb.Replace("&lt;/sub&gt;", "</sub>");
+                sb.Replace("&lt;a&gt;", "<a>");
+                sb.Replace("&lt;/a&gt;", "</a>");
+                sb.Replace("&lt;img&gt;", "<img>");
+                sb.Replace("&lt;/img&gt;", "</img>");
+                sb.Replace("&lt;li&gt;", "<li>");
+                sb.Replace("&lt;/li&gt;", "</li>");
+                sb.Replace("&lt;ul&gt;", "<ul>");
+                sb.Replace("&lt;/ul&gt;", "</ul>");
+                sb.Replace("&lt;hr&gt;", "<hr>");
+
+
+
+                topicTitle = sb.ToString();
+                
+
                 loggedOutAvailable = availableLoggedOut.Checked;
 
                 if (ddlPriority.SelectedIndex > 0)
@@ -156,6 +197,8 @@ namespace BootStrapTest.Admin.HelpTopic
 
             }
 
+            tht = helper.GetHelpTopic(db, topicID);
+            helpTopicText.Text = tht.Help_Topic_Text;
         }
     }
 }

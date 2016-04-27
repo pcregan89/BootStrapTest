@@ -110,5 +110,9 @@
         <script src="<%= ResolveUrl("~/Scripts/jquery-1.12.2.min.js") %>"></script>
         <script src="<%= ResolveUrl("~/Scripts/bootstrap.min.js") %>"></script>
         <!--<script src="<%= ResolveUrl("~/Scripts/SiteCode.js")%>"></script>-->
+
+        <!-- page javascript goes here -->
+        <asp:ContentPlaceHolder ID="javascript" runat="server">
+        </asp:ContentPlaceHolder>
 </body>
 </html>
