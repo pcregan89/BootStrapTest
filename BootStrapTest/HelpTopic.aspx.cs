@@ -12,6 +12,7 @@ namespace BootStrapTest
         int topicID;
         tbl_Help_Topic tht;
         Helpers.HelpTopic helper = new Helpers.HelpTopic();
+        Helpers.HelpCategory helperCat = new Helpers.HelpCategory();
         dbDataContext db = new dbDataContext();
         protected Boolean invalidHelpTopic;
         protected Boolean hasRelatedTopics;
@@ -41,9 +42,11 @@ namespace BootStrapTest
                     try
                     {
                         tht = helper.GetHelpTopic(db, topicID);
+                        tbl_Help_Category thc = helperCat.GetHelpCategory(db, tht.Help_Category_ID);
 
                         helpTopicText.Text = tht.Help_Topic_Text;
                         helpTopicTitle.Text = tht.Help_Topic_Header;
+                        helpTopicCategory.Text = "Category: " + "<strong>" + thc.Help_Category_Name + "</strong>";
                         lblLastUpdated.Text = "Last Updated: " + tht.Help_Topic_Last_Updated.Value.ToShortDateString();
 
                         helper.UpdateHelpTopicViewCount(db, topicID);
@@ -135,6 +138,13 @@ namespace BootStrapTest
                 Label related = (Label)e.Item.FindControl("relatedTopics");
                 related.Text = "<a href=\"helptopic.aspx?id="+relatedTopicID.ToString()+"\">" + item.Help_Topic_Header + "</a>";
             }
+        }
+
+        protected void btnShare_Click(object sender, EventArgs e)
+        {
+            helper.UpdateHelpTopicShareCount(db, topicID);
+            Response.Redirect("mailto:?subject=" + helpTopicTitle.Text + " - Meat Connected");
+            
         }
 
     }

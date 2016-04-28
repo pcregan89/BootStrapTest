@@ -26,6 +26,7 @@
                             <th>Likes</th>
                             <th>Dislikes</th>
                             <th>Edit</th>
+                            <th>Permalink</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -48,20 +49,19 @@
                         <td><%# Eval("Help_Topic_Header") %></td>
                         <td><%# Eval("Help_Topic_View_Count") %></td>
                         <td><%# Eval("Help_Topic_Share_Count") %></td>
-                        <td>
-                            <asp:Label runat="server" ID="lastupdated" Text='<%# String.Format("{0:dd MMM yyyy}", Eval("Help_Topic_Last_Updated")) %>' /></td>
+                        <td><asp:Label runat="server" ID="lastupdated" Text='<%# String.Format("{0:dd MMM yyyy}", Eval("Help_Topic_Last_Updated")) %>' /></td>
                         <td><asp:Label runat="server" ID="lblPriority" Text='<%# Eval("Help_Topic_Priority") %>' /></td>
                         <td><%# Eval("Help_Topic_Logged_Out_Available") %></td>
                         <td><%# Eval("Help_Topic_Likes") %></td>
                         <td><%# Eval("Help_Topic_Dislikes") %></td>
                         <td><button id="editButton" onclick="javascript:window.location.href='../../Admin/HelpTopic/Form.aspx?id=<%# Eval("Help_Topic_ID")  %>'; return false;">Edit</button></td>
-                            
+                        <td><a href='../../HelpTopic.aspx?id=<%# Eval("Help_Topic_ID")  %>'>Permalink</a></td>   
                     </tr>
                     <tr style="border-bottom:hidden">
                         <th>Text</th>
                     </tr>
                     <tr style="border-bottom:inset">
-                        <td colspan="11"><%# Eval("Help_Topic_Text") %></td>
+                        <td colspan="12"><%# Eval("Help_Topic_Text") %></td>
                     </tr>
                 </ItemTemplate>
             </asp:Repeater>

@@ -210,5 +210,19 @@ namespace BootStrapTest.Helpers
             db.SubmitChanges();
 
         }
+
+        public void UpdateHelpTopicShareCount(dbDataContext db, int id)
+        {
+            tbl_Help_Topic topic = GetHelpTopic(db, id);
+            int shares;
+
+            shares = Convert.ToInt32(topic.Help_Topic_View_Count);
+            shares += 1;
+
+            topic.Help_Topic_View_Count = shares;
+
+            db.SubmitChanges();
+
+        }
     }
 }
