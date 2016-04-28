@@ -219,7 +219,7 @@ namespace BootStrapTest.Helpers
             shares = Convert.ToInt32(topic.Help_Topic_Share_Count);
             shares += 1;
 
-            topic.Help_Topic_View_Count = shares;
+            topic.Help_Topic_Share_Count = shares;
 
             db.SubmitChanges();
 
