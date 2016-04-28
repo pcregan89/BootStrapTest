@@ -26,6 +26,8 @@ namespace BootStrapTest.Admin.HelpTopic
                 deleteItems = (List<int>)HttpContext.Current.Session["deleteItems"];
             else
                 deleteItems = new List<int>();
+
+            Title = "List of Help Topics";
         }
 
         protected void rptHelpTopic_ItemDataBound(object sender, RepeaterItemEventArgs e)

@@ -10,7 +10,7 @@ namespace BootStrapTest.Admin.HelpTopic
 {
     public partial class Form : System.Web.UI.Page
     {
-        int topicID = Convert.ToInt32(HttpContext.Current.Request.QueryString.Get("id"));
+        int topicID;
         Helpers.HelpTopic helper = new Helpers.HelpTopic();
         Helpers.HelpCategory helperCat = new Helpers.HelpCategory();
         dbDataContext db = new dbDataContext();
@@ -19,7 +19,15 @@ namespace BootStrapTest.Admin.HelpTopic
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            try
+            {
+                topicID = Convert.ToInt32(HttpContext.Current.Request.QueryString.Get("id"));
+            }
+            catch (FormatException)
+            {
+                topicID = 0;
+            }
+
             //don't reload the values when the button is clicked
             if (!Page.IsPostBack)
             {
@@ -92,6 +100,8 @@ namespace BootStrapTest.Admin.HelpTopic
                     heading.Text = "New Help Topic";
                 }
 
+                Title = heading.Text;
+
                 for (int x = 1; x <= 5; x++)
                 {
                     if (!helpPrioritiesUsed.Contains(x))
@@ -150,6 +160,7 @@ namespace BootStrapTest.Admin.HelpTopic
                 sb.Replace("&lt;/ol&gt;", "</ol>");
                 sb.Replace("&lt;spanl&gt;", "<span>");
                 sb.Replace("&lt;/spanl&gt;", "</span>");
+                sb.Replace("&amp;nbsp;", " ");
 
                 topicTitle = sb.ToString();
                 

@@ -148,5 +148,67 @@ namespace BootStrapTest.Helpers
 
             return del;
         }
+
+        //Updates the like count
+        public bool UpdateHelpTopicLikeCount(dbDataContext db, int id)
+        {
+            tbl_Help_Topic topic = GetHelpTopic(db, id);
+            bool ok;
+
+            int likes = Convert.ToInt32(topic.Help_Topic_Likes);
+            likes += 1;
+
+            topic.Help_Topic_Likes = likes;
+
+           
+            if (db.GetChangeSet().Updates.Contains(topic))
+            {
+                ok = true;
+            }
+            else
+                ok = false;
+
+            db.SubmitChanges();
+
+            return ok;
+        }
+
+        public bool UpdateHelpTopicDislikeCount(dbDataContext db, int id)
+        {
+            tbl_Help_Topic topic = GetHelpTopic(db, id);
+            bool ok;
+
+            int dislikes = Convert.ToInt32(topic.Help_Topic_Likes);
+            dislikes += 1;
+
+            topic.Help_Topic_Dislikes = dislikes;
+
+            if (db.GetChangeSet().Updates.Contains(topic))
+            {
+                ok = true;
+            }
+            else
+            {
+                ok = false;
+            }
+
+            db.SubmitChanges();
+
+            return ok;     
+        }
+
+        public void UpdateHelpTopicViewCount(dbDataContext db, int id)
+        {
+            tbl_Help_Topic topic = GetHelpTopic(db, id);
+            int views;
+
+            views = Convert.ToInt32(topic.Help_Topic_View_Count);
+            views += 1;
+
+            topic.Help_Topic_View_Count = views;
+
+            db.SubmitChanges();
+
+        }
     }
 }

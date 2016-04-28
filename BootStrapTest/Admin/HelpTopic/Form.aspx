@@ -3,11 +3,9 @@
 <asp:Content ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="../../Content/trumbowyg.min.css" />
 </asp:Content>
-<asp:Content ContentPlaceHolderId="ContentPlaceHolder1" runat="server">
-        
-   <div class="col-xs-8 col-xs-offset-1">
-
-       <h2 style="padding-top:20px"><asp:Label ID ="heading" runat="server"></asp:Label></h2>
+<asp:Content ContentPlaceHolderId="ContentPlaceHolder1" runat="server">  
+   <div class="col-xs-8">
+       <h2 style="padding-top:-10px"><asp:Label ID ="heading" runat="server"></asp:Label></h2>
      
       <fieldset class="form-group">
     <label for="exampleInputEmail1">Help Topic Category</label>
