@@ -143,8 +143,7 @@ namespace BootStrapTest
         protected void btnShare_Click(object sender, EventArgs e)
         {
             helper.UpdateHelpTopicShareCount(db, topicID);
-            Response.Redirect("mailto:?subject=" + helpTopicTitle.Text + " - Meat Connected");
-            
+            Response.Redirect("mailto:?subject=" + helpTopicTitle.Text + " - Meat Connected");  
         }
 
     }
