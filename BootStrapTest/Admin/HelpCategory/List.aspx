@@ -7,7 +7,7 @@
     <button type="button" runat="server" class="btn btn-primary" onserverclick="btnAdd_Click">
             <i class="fa fa-pencil-square-o"></i> Add New Category</button>
     <button type="button" runat="server" class="btn btn-danger" onserverclick="btnDelete_Click">
-            <i class="fa fa-trash-o"></i> Delete Selected</button>
+            <i class="fa fa-trash-o"></i> Delete Selected</button><br /><br />
     <asp:Label ID="lblWarning" runat="server"></asp:Label>
     <br /><br />
     <table id="catList" class="table table-striped table-bordered table-hover">

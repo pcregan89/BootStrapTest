@@ -53,6 +53,8 @@ namespace BootStrapTest.Helpers
                 cat.Help_Category_Order = order;
             if (parent > -1)
                 cat.Help_Category_Parent_ID = parent;
+            else
+                cat.Help_Category_Parent_ID = null;
             cat.Help_Category_Logged_Out_Available = loggedOut;
 
             db.SubmitChanges();

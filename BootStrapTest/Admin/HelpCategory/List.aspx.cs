@@ -75,7 +75,7 @@ namespace BootStrapTest.Admin.HelpCategory
                     int catID = Convert.ToInt32(lblID.Text.ToString());
 
                     //Check category has no children
-                    List <tbl_Help_Category> child = helper.GetHelpCategoryChildren(db, catID);
+                    List<tbl_Help_Category> child = helper.GetHelpCategoryChildren(db, catID);
 
                     if (child.Count == 0)
                         helper.DeleteHelpCategory(db, catID);
