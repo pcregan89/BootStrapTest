@@ -9,6 +9,7 @@ namespace BootStrapTest.Admin.HelpCategory
     {
         int id;
         Helpers.HelpCategory helper = new Helpers.HelpCategory();
+        Helpers.HelpTopic helpTop = new Helpers.HelpTopic();
         dbDataContext db = new dbDataContext();
 
         protected void Page_Load(object sender, EventArgs e)
@@ -170,9 +171,10 @@ namespace BootStrapTest.Admin.HelpCategory
 
             //Check category has no children
             List<tbl_Help_Category> child = helper.GetHelpCategoryChildren(db, id);
+            List<tbl_Help_Topic> topics = helpTop.GetHelpTopicCategory(db, id);
 
-            if (child == null)
-                del = helper.DeleteHelpCategory(db, id);
+            if (child.Count == 0 && topics.Count == 0)
+                helper.DeleteHelpCategory(db, id);
             else
             {
                 //children = true;

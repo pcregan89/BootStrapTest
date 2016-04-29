@@ -6,9 +6,10 @@ using System.Web.UI.WebControls;
 
 namespace BootStrapTest.Admin.HelpCategory
 {
-    public partial class List : System.Web.UI.Page
+    public partial class List : Page
     {
         Helpers.HelpCategory helper = new Helpers.HelpCategory();
+        Helpers.HelpTopic helpTop = new Helpers.HelpTopic();
         dbDataContext db = new dbDataContext();
 
         protected void Page_Load(object sender, EventArgs e)
@@ -74,10 +75,11 @@ namespace BootStrapTest.Admin.HelpCategory
                     Label lblID = (Label)item.FindControl("lblID");
                     int catID = Convert.ToInt32(lblID.Text.ToString());
 
-                    //Check category has no children
+                    //Check category has no child categories or topics
                     List<tbl_Help_Category> child = helper.GetHelpCategoryChildren(db, catID);
+                    List<tbl_Help_Topic> topics = helpTop.GetHelpTopicCategory(db, catID);
 
-                    if (child.Count == 0)
+                    if (child.Count == 0 && topics.Count == 0)
                         helper.DeleteHelpCategory(db, catID);
                     else
                         children += " " + catID + " ";
@@ -143,8 +145,9 @@ namespace BootStrapTest.Admin.HelpCategory
 
             //Check category has no children
             List<tbl_Help_Category> child = helper.GetHelpCategoryChildren(db, catID);
+            List<tbl_Help_Topic> topics = helpTop.GetHelpTopicCategory(db, catID);
 
-            if (child.Count == 0)
+            if (child.Count == 0 && topics.Count == 0)
                 del = helper.DeleteHelpCategory(db, catID);
             else
                 children = true;
@@ -154,6 +157,7 @@ namespace BootStrapTest.Admin.HelpCategory
                 lblWarning.Text = "Record deleted";
                 lblWarning.CssClass = "text-success";
                 lblWarning.Visible = true;
+
                 //Refresh Repeater data source
                 rptCategories.DataSource = helper.GetHelpCategories(db);
                 rptCategories.DataBind();
