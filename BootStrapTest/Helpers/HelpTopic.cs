@@ -28,6 +28,8 @@ namespace BootStrapTest.Helpers
         //Add or edit topic
         public int AddUpdateHelpTopic(dbDataContext db, int id, string header, string text, int cat, bool loggedOut, int? priority)
         {
+            int returnValue;
+
             tbl_Help_Topic topic;
             if (id > 0)
                 topic = GetHelpTopic(db, id);
@@ -62,12 +64,16 @@ namespace BootStrapTest.Helpers
             }
 
             topic.Help_Topic_Last_Updated = DateTime.Now;
+            
+
+            if (db.GetChangeSet().Inserts.Contains(topic) || db.GetChangeSet().Updates.Contains(topic))
+                returnValue = id;
+            else
+                returnValue = -1;
+
             db.SubmitChanges();
 
-            if (db.GetChangeSet() != null)
-                return id;
-            else
-                return -1;
+            return returnValue;
         }
 
         public int AddUpdateHelpTopic(dbDataContext db, int id, string header, string text, int cat, bool loggedOut, int priority, int dislikes, int likes,

@@ -205,8 +205,11 @@ namespace BootStrapTest.Admin.HelpTopic
 
             }
 
-            tht = helper.GetHelpTopic(db, topicID);
-            helpTopicText.Text = tht.Help_Topic_Text;
+            if (topicID > 0)
+            {
+                tht = helper.GetHelpTopic(db, topicID);
+                helpTopicText.Text = tht.Help_Topic_Text;
+            }
         }
     }
 }
