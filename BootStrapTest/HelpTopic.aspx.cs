@@ -54,7 +54,7 @@ namespace BootStrapTest
                         Helpers.HelpTopicRelated htr = new Helpers.HelpTopicRelated();
                         List<tbl_Help_Topic_Related> relatedTopics = htr.GetHelpTopicRelatedTopic(db, topicID);
 
-                        if (relatedTopics != null)
+                        if (relatedTopics.Count > 0)
                         {
                             hasRelatedTopics = true;
                             rptRelatedHelpTopics.DataSource = relatedTopics;

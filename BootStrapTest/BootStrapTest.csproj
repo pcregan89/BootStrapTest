@@ -187,6 +187,8 @@
     <Content Include="Admin\HelpCategory\List.aspx" />
     <Content Include="Admin\HelpTopic\Form.aspx" />
     <Content Include="Admin\HelpTopic\List.aspx" />
+    <Content Include="Admin\RelatedTopics\Form.aspx" />
+    <Content Include="Admin\RelatedTopics\List.aspx" />
     <Content Include="Content\bootstrap-rating.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -263,6 +265,20 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\RelatedTopics\Form.aspx.cs">
+      <DependentUpon>Form.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\RelatedTopics\Form.aspx.designer.cs">
+      <DependentUpon>Form.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\RelatedTopics\List.aspx.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\RelatedTopics\List.aspx.designer.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+    </Compile>
     <Compile Include="HelpTopic.aspx.cs">
       <DependentUpon>HelpTopic.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
