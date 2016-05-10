@@ -185,6 +185,8 @@
   <ItemGroup>
     <Content Include="Admin\HelpCategory\Form.aspx" />
     <Content Include="Admin\HelpCategory\List.aspx" />
+    <Content Include="Admin\HelpTopicTags\Form.aspx" />
+    <Content Include="Admin\HelpTopicTags\List.aspx" />
     <Content Include="Admin\HelpTopic\Form.aspx" />
     <Content Include="Admin\HelpTopic\List.aspx" />
     <Content Include="Admin\RelatedTopics\Form.aspx" />
@@ -265,6 +267,20 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin\HelpTopicTags\Form.aspx.cs">
+      <DependentUpon>Form.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\HelpTopicTags\Form.aspx.designer.cs">
+      <DependentUpon>Form.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\HelpTopicTags\List.aspx.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\HelpTopicTags\List.aspx.designer.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\RelatedTopics\Form.aspx.cs">
       <DependentUpon>Form.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

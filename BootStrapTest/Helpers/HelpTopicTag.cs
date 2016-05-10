@@ -21,11 +21,11 @@ namespace BootStrapTest.Helpers
         }
 
         //Add or update TopicTag
-        public int AddUpdateHelpTopicTag(dbDataContext db, int id, string name)
+        public int AddUpdateHelpTopicTag(dbDataContext db, int tagID, int topicID, string name)
         {
             tbl_Help_Topic_Tag tag;
-            if (id > 0)
-                tag = GetHelpTopicTag(db, id);
+            if (tagID > 0)
+                tag = GetHelpTopicTag(db, tagID);
             else
             {   // Add new category
                 tag = new tbl_Help_Topic_Tag();
@@ -35,14 +35,12 @@ namespace BootStrapTest.Helpers
             if (name.Length > 0 && name.Length <= 100)
                 tag.Help_Topic_Tag_Text = name;
 
-            //Get new ID
-            if (id == 0)
-                id = db.tbl_Help_Topic_Tags.Last().Help_Topic_Tag_ID + 1;
+            tag.Help_Topic_ID = topicID;
 
             db.SubmitChanges();
 
             if (db.GetChangeSet().Updates.Contains(tag))
-                return id;
+                return tagID;
             else
                 return -1;
         }
