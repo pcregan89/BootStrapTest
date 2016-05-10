@@ -28,7 +28,11 @@ namespace BootStrapTest.Helpers
         //get Help category based on parent ID
         public List<tbl_Help_Category> GetHelpCategoryChildren(dbDataContext db, int id)
         {
-            IQueryable<tbl_Help_Category> list = db.tbl_Help_Categories.Where(t => t.Help_Category_Parent_ID == id);
+            IQueryable<tbl_Help_Category> list;
+            if (id != 0)
+                list = db.tbl_Help_Categories.Where(t => t.Help_Category_Parent_ID == id);
+            else
+                list = db.tbl_Help_Categories.Where(t => t.Help_Category_Parent_ID == null);
             return list.ToList();
         }
 

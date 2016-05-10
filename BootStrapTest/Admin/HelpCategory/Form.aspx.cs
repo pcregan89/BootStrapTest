@@ -129,19 +129,11 @@ namespace BootStrapTest.Admin.HelpCategory
             }
             else
             {
-                //Determine whether record added or updated from ID
+                //Determine whether record was added or updated from ID and return message to List page
                 if (id == -1)
-                {
                     Response.Redirect("../HelpCategory/List.aspx?msg=Record Added");
-                    //lblWarning.Text = "Record added";
-                    //lblWarning.CssClass = "text-success";
-                }
                 else
-                {
                     Response.Redirect("../HelpCategory/List.aspx?msg=Record Updated");
-                    //lblWarning.Text = "Record updated";
-                    //lblWarning.CssClass = "text-success";
-                }
 
 
                 //If record added, clear form to allow new record
@@ -176,15 +168,13 @@ namespace BootStrapTest.Admin.HelpCategory
             if (child.Count == 0 && topics.Count == 0)
                 helper.DeleteHelpCategory(db, id);
             else
-            {
-                //children = true;
                 children = true;
-            }
 
             if (del)
                 Response.Redirect("../HelpCategory/List.aspx?msg=Record Deleted");
             else if (children == true)
             {
+                //Display error message if record has dependencies
                 lblWarning.Text = "This record (ID: " + id + ") has dependencies. Please check these before deleting.";
                 lblWarning.CssClass = "text-danger";
             }

@@ -74,7 +74,7 @@
                     </li>
                     <li class="list-group-item"><span class="badge">
                         <i class="fa fa-angle-right icon-data fa-fw"></i></span>
-                        <a href="#">Related Topics</a>
+                        <a href="../../Admin/RelatedTopics/List.aspx">Related Topics</a>
                     </li>
                 </ul>
             </div>

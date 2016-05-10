@@ -29,8 +29,8 @@ namespace BootStrapTest.Admin.HelpCategory
                     lblWarning.Visible = false;
                 }
 
-                    // Bind the repeater
-                    Repeater rptCategories = (Repeater)Master.FindControl("ContentPlaceHolder1").FindControl("rptCategories");
+                // Bind the repeater
+                Repeater rptCategories = (Repeater)Master.FindControl("ContentPlaceHolder1").FindControl("rptCategories");
                 rptCategories.DataSource = helper.GetHelpCategories(db);
                 rptCategories.DataBind();
 
