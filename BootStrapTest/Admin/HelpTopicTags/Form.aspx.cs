@@ -32,18 +32,46 @@ namespace BootStrapTest.Admin.HelpTopicTags
                 rptTags.DataSource = helpTag.GetHelpTopicTagTopic(db, id);
                 rptTags.DataBind();
             }
+
+            //Get unique tag text values
+            //List<tbl_Help_Topic_Tag> autocomplete = helpTag.GetDistinctHelpTopics(db);
+            //string[] tags = new string[autocomplete.Count];
+            //int count = 0;
+            //while (count < autocomplete.Count)
+            //{
+            //    tags[count] = autocomplete[count].Help_Topic_Tag_Text;
+            //    count++;
+            //}
         }
 
         protected void btnAddTag_Click(object sender, EventArgs e)
         {
             TextBox txtTags = (TextBox)Master.FindControl("ContentPlaceHolder1").FindControl("txtTags");
 
-            helpTag.AddUpdateHelpTopicTag(db, 0, id, txtTags.Text);
+            if (txtTags.Text != "")
+            {
+                try
+                {
+                    helpTag.AddUpdateHelpTopicTag(db, 0, id, txtTags.Text);
 
-            //Rebind repeater
-            rptTags.DataSource = helpTag.GetHelpTopicTagTopic(db, id);
-            rptTags.DataBind();
-            txtTags.Text = "";
+                    //Rebind repeater
+                    rptTags.DataSource = helpTag.GetHelpTopicTagTopic(db, id);
+                    rptTags.DataBind();
+                    txtTags.Text = "";
+                    lblWarning.Text = "Tag added";
+                    lblWarning.CssClass = "text-success";
+                }
+                catch (System.Data.SqlClient.SqlException)
+                {
+                    lblWarning.Text = "Tag already assigned to this article.";
+                    lblWarning.CssClass = "text-danger";
+                }
+            }
+            else
+            {
+                lblWarning.Text = "Please enter a tag to add.";
+                lblWarning.CssClass = "text-danger";
+            }
         }
 
         protected void btnRowDelete_Click(object sender, EventArgs e)
@@ -86,6 +114,25 @@ namespace BootStrapTest.Admin.HelpTopicTags
         {
             //Return to List.aspx
             Response.Redirect("../HelpTopicTags/List.aspx");
+        }
+        
+        //Compare tags in list to keyword
+        public static string [] GetAutoComplete(string keyword)
+        {
+            //Get unique tags to populate autocomplete
+            Helpers.HelpTopicTag helpTag = new Helpers.HelpTopicTag();
+            dbDataContext db = new dbDataContext();
+            List<tbl_Help_Topic_Tag> autocomplete = helpTag.GetDistinctHelpTopics(db);
+            string[] tags = new string[autocomplete.Count];
+            int count = 0;
+            while (count < autocomplete.Count)
+            {
+                if (autocomplete[count].Help_Topic_Tag_Text.Contains(keyword))
+                    tags[count] = autocomplete[count].Help_Topic_Tag_Text;
+                count++;
+            }
+
+            return tags;
         }
     }
 }

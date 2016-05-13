@@ -6,18 +6,14 @@
     <h2>Edit Help Topic Tags</h2>
     <asp:Label runat="server" ID="lblTopic" Font-Bold="true"></asp:Label><br />
     <div class="input-group">
-        <%--<input id="txtTags" type="text" class="  search-query form-control" placeholder="Enter tag" style="height: 30px" />--%>
-        <asp:TextBox runat="server" ID="txtTags" CssClass="search-query form-control" Height="30px" placeholder="Enter Tags"></asp:TextBox>
+       <asp:TextBox runat="server" ID="txtTags" CssClass="search-query form-control" Height="30px" placeholder="Enter Tags"></asp:TextBox>
         <span class="input-group-btn">
-            <%--<button id="btnAddTag" class="btn btn-primary" type="button" onclick="btnAddTag_Click" style="height: 30px">
-                <span class="fa fa-plus"></span>
-            </button>--%>
             <asp:LinkButton ID="btnAddTag" runat="server" CssClass="btn btn-primary" Height="30px" OnClick="btnAddTag_Click">
                     <i class="fa fa-plus"></i>
             </asp:LinkButton>
         </span>
+    <span style="margin-left:20px;"><asp:Label ID="lblWarning" runat="server"></asp:Label></span>
     </div><br />
-    <asp:Label ID="lblWarning" runat="server"></asp:Label>
     <table id="catList" class="table table-striped table-bordered table-hover">
         <thead>
             <tr>
@@ -46,5 +42,5 @@
     </table>
     <asp:Button ID="btnCancel" runat="server" Text="Back" OnClick="btnCancel_Click" CssClass="btn btn-default" />
 </asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="javascript" runat="server">
+<asp:Content ID="Content3" ContentPlaceHolderID="javascript" runat="server"> 
 </asp:Content>

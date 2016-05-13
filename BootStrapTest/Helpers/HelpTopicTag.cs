@@ -20,6 +20,16 @@ namespace BootStrapTest.Helpers
             return list.ToList();
         }
 
+        //Get unique occurrences of tag text
+        public List<tbl_Help_Topic_Tag> GetDistinctHelpTopics(dbDataContext db)
+        {
+            //IQueryable<tbl_Help_Topic_Tag> list = db.tbl_Help_Topic_Tags;
+            //return list.ToList();
+
+            List<tbl_Help_Topic_Tag> distinctPeople = db.tbl_Help_Topic_Tags.GroupBy(t => t.Help_Topic_Tag_Text).Select(g => g.First()).ToList();
+            return distinctPeople;
+        }
+
         //Add or update TopicTag
         public int AddUpdateHelpTopicTag(dbDataContext db, int tagID, int topicID, string name)
         {
@@ -36,7 +46,7 @@ namespace BootStrapTest.Helpers
                 tag.Help_Topic_Tag_Text = name;
 
             tag.Help_Topic_ID = topicID;
-
+            
             db.SubmitChanges();
 
             if (db.GetChangeSet().Updates.Contains(tag))
