@@ -130,3 +130,22 @@ a:hover, a:focus{
     font-size: 14px;
     line-height: 26px;
 }
+
+.menu-child {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  margin-bottom: -1px;
+  padding-left:20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+}
+
+.divblock {
+     display: table;
+     text-align: center;
+ }
+.btn-align{
+    display: table-cell;
+    vertical-align: middle;
+}

@@ -6,7 +6,7 @@
     <h2>Edit Help Topic Tags</h2>
     <asp:Label runat="server" ID="lblTopic" Font-Bold="true"></asp:Label><br />
     <div class="input-group">
-       <asp:TextBox runat="server" ID="txtTags" CssClass="search-query form-control" Height="30px" placeholder="Enter Tags"></asp:TextBox>
+       <asp:TextBox runat="server" ID="txtTags" CssClass="form-control" Height="30px" placeholder="Enter Tags"></asp:TextBox>
         <span class="input-group-btn">
             <asp:LinkButton ID="btnAddTag" runat="server" CssClass="btn btn-primary" Height="30px" OnClick="btnAddTag_Click">
                     <i class="fa fa-plus"></i>

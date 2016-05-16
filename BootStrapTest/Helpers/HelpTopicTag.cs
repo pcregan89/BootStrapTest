@@ -20,6 +20,13 @@ namespace BootStrapTest.Helpers
             return list.ToList();
         }
 
+        //Get tags based on keyword
+        public List<tbl_Help_Topic_Tag> GetHelpTopicTagKeyword(dbDataContext db, string key)
+        {
+            IQueryable<tbl_Help_Topic_Tag> list = db.tbl_Help_Topic_Tags.Where(t => t.Help_Topic_Tag_Text.Contains(key));
+            return list.ToList();
+        }
+
         //Get unique occurrences of tag text
         public List<tbl_Help_Topic_Tag> GetDistinctHelpTopics(dbDataContext db)
         {

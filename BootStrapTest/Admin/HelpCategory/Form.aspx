@@ -11,19 +11,19 @@
     </div>
     <div class="form-group">
         <label>Category Name</label><span class="text-danger" style="font-size:18px; font-weight:bold;">*</span><br />
-        <asp:TextBox ID="txtName" runat="server"></asp:TextBox>
+        <asp:TextBox ID="txtName" runat="server" CssClass="form-control"></asp:TextBox>
     </div>
     <div class="form-group">
         <label>Order</label><br />
-        <asp:TextBox ID="txtOrder" runat="server"></asp:TextBox>
+        <asp:TextBox ID="txtOrder" runat="server" CssClass="form-control"></asp:TextBox>
     </div>
     <div class="form-group">
         <label>Parent Category</label><br />
-        <asp:DropDownList ID="ddlParent" runat="server"></asp:DropDownList>
+        <asp:DropDownList ID="ddlParent" runat="server" CssClass="form-control"></asp:DropDownList>
     </div>
     <div class="form-group">
         <label>Available When Logged Out</label><span class="text-danger" style="font-size:18px; font-weight:bold;">*</span><br />
-        <asp:RadioButtonList ID="rbLoggedOut" runat="server">
+        <asp:RadioButtonList ID="rbLoggedOut" runat="server" CssClass="radio">
             <asp:ListItem>True</asp:ListItem>
             <asp:ListItem>False</asp:ListItem>
         </asp:RadioButtonList>

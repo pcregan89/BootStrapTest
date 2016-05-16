@@ -12,14 +12,15 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
 </head>
 <body>
+    <form runat="server">
     <nav class="navbar navbar-inverse navbar-top" style="margin-top: -50px;">
         <div class="container">
             <div class="navbar-header">
                 <a href="#" style="color: #ffffff; font-size: 18px;"><img src="/Images/mcicon.jpg"/>  Help Centre</a></div>
             <div id="navbar" class="navbar-collapse collapse">
-                <form class="navbar-form navbar-right">
+                <div class="navbar-form navbar-right">
                     <button type="submit" class="btn btn-primary">Sign in</button>
-                </form>
+                </div>
             </div>
             <!--/.navbar-collapse -->
         </div>
@@ -30,18 +31,16 @@
         <div class="container">
             <div class="row">
                 <div class="span4" style="height: 70px; text-align: right;">
-                    <form class="form-search">
-                        <div id="custom-search-input" style="padding-left: 400px;">
-                            <div class="input-group">
-                                <input type="text" class="  search-query form-control" placeholder="Search" style="width: 600px; height: 50px" />
-                                <span class="input-group-btn">
-                                    <button class="btn btn-primary" type="button" style="height: 50px">
-                                        <span class="fa fa-search"></span>
-                                    </button>
-                                </span>
-                            </div>
-                        </div>
-                    </form>
+                    <div id="custom-search-input" style="padding-left: 400px;">
+                        <asp:Panel runat="server" ID="pnlSearch" CssClass="input-group" DefaultButton="btnSearch">
+                            <asp:TextBox runat="server" ID="txtSearch" CssClass="search-query form-control" KeyDown="OnKeyDownHandler" placeholder="Search" Width="600px" Height="50px"></asp:TextBox>
+                            <span class="input-group-btn" style="vertical-align:middle;">
+                                <asp:LinkButton ID="btnSearch" runat="server" CssClass="btn btn-primary btn-align" Height="50px" OnClick="btnSearch_Click">
+                                    <i class="fa fa-search"></i>
+                                </asp:LinkButton>
+                            </span>
+                        </asp:Panel>
+                    </div>
                 </div>
             </div>
         </div>
@@ -81,12 +80,10 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-9">
-                        <form runat="server">
-                            <div>
-                                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-                                </asp:ContentPlaceHolder>
-                            </div>
-                        </form>
+                        <div>
+                            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                            </asp:ContentPlaceHolder>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -112,5 +109,6 @@
             <script src="<%= ResolveUrl("~/Scripts/jquery-1.12.2.min.js") %>"></script>
         <script src="<%= ResolveUrl("~/Scripts/bootstrap.min.js") %>"></script>
         </asp:ContentPlaceHolder>
+    </form>
 </body>
 </html>

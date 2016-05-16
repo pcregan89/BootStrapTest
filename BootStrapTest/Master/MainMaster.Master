@@ -1,14 +1,6 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MainMaster.master.cs" Inherits="BootStrapTest.MainMaster" %>
 
 <!DOCTYPE html>
-<script runat="server">
-
-    protected void lnkHead_Click(object sender, EventArgs e)
-    {
-
-    }
-</script>
-
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
@@ -17,24 +9,21 @@
     </asp:ContentPlaceHolder>
     <link href="../Content/bootstrap.css" rel="stylesheet" />
     <link href="../Content/Site.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
 </head>
 <body>
+    <form runat="server">
     <nav class="navbar navbar-inverse navbar-top" style="margin-top: -50px;">
         <div class="container">
             <div class="navbar-header">
-                <a href="#" style="color: #ffffff; font-size: 18px;">
-                    <img src="/Images/mcicon.jpg" />
-                    Help Centre</a>
-            </div>
-
+                <a href="#" style="color: #ffffff; font-size: 18px;"><img src="/Images/mcicon.jpg"/>  Help Centre</a></div>
             <div id="navbar" class="navbar-collapse collapse">
                 <div class="navbar-form navbar-right">
                     <button type="submit" class="btn btn-primary">Sign in</button>
                 </div>
             </div>
+            <!--/.navbar-collapse -->
         </div>
-        <!--/.navbar-collapse -->
     </nav>
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
@@ -42,17 +31,15 @@
         <div class="container">
             <div class="row">
                 <div class="span4" style="height: 70px; text-align: right;">
-                    <div class="form-search">
-                        <div id="custom-search-input" style="padding-left: 400px;">
-                            <div class="input-group">
-                                <input type="text" class="  search-query form-control" placeholder="Search" style="width: 600px; height: 50px" />
-                                <span class="input-group-btn">
-                                    <button class="btn btn-primary" type="button" style="height: 50px">
-                                        <span class="fa fa-search"></span>
-                                    </button>
-                                </span>
-                            </div>
-                        </div>
+                    <div id="custom-search-input" style="padding-left: 400px;">
+                        <asp:Panel runat="server" ID="pnlSearch" CssClass="input-group" DefaultButton="btnSearch">
+                            <asp:TextBox runat="server" ID="txtSearch" CssClass="search-query form-control" KeyDown="OnKeyDownHandler" placeholder="Search" Width="600px" Height="50px"></asp:TextBox>
+                            <span class="input-group-btn" style="vertical-align:middle;">
+                                <asp:LinkButton ID="btnSearch" runat="server" CssClass="btn btn-primary btn-align" Height="50px" OnClick="btnSearch_Click">
+                                    <i class="fa fa-search"></i>
+                                </asp:LinkButton>
+                            </span>
+                        </asp:Panel>
                     </div>
                 </div>
             </div>
@@ -68,58 +55,61 @@
     </div>
 
     <div class="container" style="width: 100%;">
-        <form runat="server">
-            <!-- Example row of columns -->
-            <div class="row">
-                <div class="col-md-3">
-                    <ul class="list-group product-category-all">
-                        <!--Menu Header-->
-                        <li class="breadcrumb"><span>
-                            <asp:Label runat="server" id="lblIcon" class="fa fa-home icon-data fa-fw"></asp:Label></span>
-                            <asp:LinkButton ID="lnkHead" runat="server" Text="Home" OnClientClick="lnkHead_Click"></asp:LinkButton>
-                            <asp:Label ID="lblHeadID" runat="server" Visible="false"></asp:Label>
-                        </li>
-                        <!--Add Help Category Repeater Here-->
-                        <asp:Repeater ID="rptCategories" runat="server">
-                            <ItemTemplate>
-                                <li class="list-group-item"><span class="badge">
-                                    <i class="fa fa-angle-right icon-data fa-fw"></i></span>
-                                    <asp:LinkButton ID="lnkCategory" runat="server" Text='<%# Eval("Help_Category_Name") %>' OnClick="CategoryLink_Click"></asp:LinkButton>
-                                    <asp:Label ID="lblID" runat="server" Visible="false" Text='<%# Eval("Help_Category_ID") %>'></asp:Label>
-                                </li>
-                            </ItemTemplate>
-                        </asp:Repeater>
-                    </ul>
-                </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-9">
-                            <div>
-                                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-                                </asp:ContentPlaceHolder>
-                            </div>
+        <!-- Example row of columns -->
+        <div class="row">
+            <div class="col-md-3">
+                <!--Menu goes here-->
+                <ul class="list-group product-category-all">
+                    <li class="list-group-item"><span>
+                        <i class="fa fa-home icon-data"></i></span>
+                        <a href="/Home.aspx">Home</a>
+                    </li>
+                    <li class="list-group-item"><span class="badge">
+                        <i class="fa fa-angle-right icon-data fa-fw"></i></span>
+                        <a href="../../Admin/HelpTopic/List.aspx">Help Topics</a>
+                    </li>
+                    <li class="list-group-item"><span class="badge">
+                        <i class="fa fa-angle-right icon-data fa-fw"></i></span>
+                        <a href="../../Admin/HelpTopicTags/List.aspx">Help Topic Tags</a>
+                    </li>
+                    <li class="list-group-item"><span class="badge">
+                        <i class="fa fa-angle-right icon-data fa-fw"></i></span>
+                        <a href="../../Admin/RelatedTopics/List.aspx">Related Topics</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div>
+                            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                            </asp:ContentPlaceHolder>
                         </div>
                     </div>
                 </div>
             </div>
-            <hr/>
-        </form>
-    </div>
-    <!-- /container -->
-    <footer class="footer">
-        <div class="container">
-            <%--<p class="text-muted">Place sticky footer content here.</p>--%>
+
+            <hr>
         </div>
-    </footer>
+     </div>
+        <!-- /container -->
+        <footer class="footer">
+            <div class="container">
+                <%--<p class="text-muted">Place sticky footer content here.</p>--%>
+            </div>
+        </footer>
 
 
-    <!-- Bootstrap core JavaScript
+        <!-- Bootstrap core JavaScript
 	================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>--%>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="Scripts/jquery-1.12.2.min.js"></script>
-    <script src="Scripts/bootstrap.min.js"></script>
-    <script src="Scripts/SiteCode.js"></script>
+        <!-- Placed at the end of the document so the pages load faster -->
+        <%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>--%>
+        
+        <!-- page javascript goes here -->
+        <asp:ContentPlaceHolder ID="javascript" runat="server">
+            <script src="<%= ResolveUrl("~/Scripts/jquery-1.12.2.min.js") %>"></script>
+            <script src="<%= ResolveUrl("~/Scripts/bootstrap.min.js") %>"></script>
+        </asp:ContentPlaceHolder>
+    </form>
 </body>
 </html>

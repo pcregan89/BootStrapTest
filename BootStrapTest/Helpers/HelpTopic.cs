@@ -25,6 +25,13 @@ namespace BootStrapTest.Helpers
             return list.ToList();
         }
 
+        //Get topics based on keyword
+        public List<tbl_Help_Topic> GetHelpTopicKeyword(dbDataContext db, string key)
+        {
+            IQueryable<tbl_Help_Topic> list = db.tbl_Help_Topics.Where(t => t.Help_Topic_Text.Contains(key) || t.Help_Topic_Header.Contains(key));
+            return list.ToList();
+        }
+
         //Add or edit topic
         public int AddUpdateHelpTopic(dbDataContext db, int id, string header, string text, int cat, bool loggedOut, int? priority)
         {
