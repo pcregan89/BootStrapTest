@@ -22,13 +22,22 @@ namespace BootStrapTest {
         protected global::System.Web.UI.WebControls.Panel pnlHome;
         
         /// <summary>
-        /// pnlTopics control.
+        /// rptPriority control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlTopics;
+        protected global::System.Web.UI.WebControls.Repeater rptPriority;
+        
+        /// <summary>
+        /// pnlAccordion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlAccordion;
         
         /// <summary>
         /// rptTopics control.

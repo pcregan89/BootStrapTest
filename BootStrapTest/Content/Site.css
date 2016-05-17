@@ -149,3 +149,34 @@ a:hover, a:focus{
     display: table-cell;
     vertical-align: middle;
 }
+
+.home-tiles{
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+/*Accordion styles*/
+.ui-accordion a
+{
+    font-size:10px;
+    color:#4267b2;
+}
+
+.ui-state-default
+{
+    background:#ffffff;
+}
+
+.ui-accordion-header-active
+{
+    border:solid 1px black;
+}
+
+.ui-corner-all{
+    border-bottom-left-radius:0px;
+    border-bottom-right-radius: 0px;
+    border-top-left-radius:0px;
+    border-top-right-radius:0px;
+}

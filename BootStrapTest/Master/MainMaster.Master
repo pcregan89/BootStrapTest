@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MainMaster.master.cs" Inherits="BootStrapTest.MainMaster" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MainMaster.master.cs" Inherits="BootStrapTest.MainMaster" EnableViewState="false" %>
 
 <!DOCTYPE html>
 
@@ -13,6 +13,7 @@
 </head>
 <body>
     <form runat="server">
+    <asp:ScriptManager runat="server" ID="scManager"></asp:ScriptManager>
     <nav class="navbar navbar-inverse navbar-top" style="margin-top: -50px;">
         <div class="container">
             <div class="navbar-header">
@@ -59,23 +60,21 @@
         <div class="row">
             <div class="col-md-3">
                 <!--Menu goes here-->
+                <asp:Label ID="lblPageID" runat="server" Visible="false"></asp:Label>
                 <ul class="list-group product-category-all">
                     <li class="list-group-item"><span>
                         <i class="fa fa-home icon-data"></i></span>
                         <a href="/Home.aspx">Home</a>
                     </li>
-                    <li class="list-group-item"><span class="badge">
-                        <i class="fa fa-angle-right icon-data fa-fw"></i></span>
-                        <a href="../../Admin/HelpTopic/List.aspx">Help Topics</a>
-                    </li>
-                    <li class="list-group-item"><span class="badge">
-                        <i class="fa fa-angle-right icon-data fa-fw"></i></span>
-                        <a href="../../Admin/HelpTopicTags/List.aspx">Help Topic Tags</a>
-                    </li>
-                    <li class="list-group-item"><span class="badge">
-                        <i class="fa fa-angle-right icon-data fa-fw"></i></span>
-                        <a href="../../Admin/RelatedTopics/List.aspx">Related Topics</a>
-                    </li>
+                    <asp:Repeater runat="server" ID="rptTopics">
+                        <ItemTemplate>
+                            <div class="list-group-item"><span class="badge">
+                                <i class="fa fa-angle-right icon-data fa-fw"></i></span>
+                                <asp:Label ID="lblID" runat="server" Visible="false"><%#Eval("Help_Category_ID") %></asp:Label>
+                                <asp:LinkButton runat="server" AutoPostBack="true" ID="lnkCategory" OnClick="lnkCategory_Click" Text='<%#Eval("Help_Category_Name") %>'></asp:LinkButton>
+                            </div>
+                        </ItemTemplate>
+                    </asp:Repeater>
                 </ul>
             </div>
             <div class="container">

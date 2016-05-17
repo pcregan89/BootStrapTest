@@ -32,6 +32,13 @@ namespace BootStrapTest.Helpers
             return list.ToList();
         }
 
+        //Get topics based on priority
+        public List<tbl_Help_Topic> GetHelpTopicPriority(dbDataContext db)
+        {
+            IQueryable<tbl_Help_Topic> list = db.tbl_Help_Topics.Where(t => t.Help_Topic_Priority != null).OrderBy(t => t.Help_Topic_Priority);
+            return list.ToList();
+        }
+
         //Add or edit topic
         public int AddUpdateHelpTopic(dbDataContext db, int id, string header, string text, int cat, bool loggedOut, int? priority)
         {
