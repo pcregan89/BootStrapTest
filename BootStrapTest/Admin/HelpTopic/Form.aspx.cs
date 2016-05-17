@@ -16,17 +16,22 @@ namespace BootStrapTest.Admin.HelpTopic
         dbDataContext db = new dbDataContext();
         List<int> helpPrioritiesUsed = new List<int>();
         tbl_Help_Topic tht;
+        string message;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
                 topicID = Convert.ToInt32(HttpContext.Current.Request.QueryString.Get("id"));
+                message = HttpContext.Current.Request.QueryString.Get("message");
             }
             catch (FormatException)
             {
                 topicID = 0;
             }
+
+            if (!String.IsNullOrEmpty(message))
+                result.Text = message;
 
             //don't reload the values when the button is clicked
             if (!Page.IsPostBack)
@@ -158,8 +163,8 @@ namespace BootStrapTest.Admin.HelpTopic
                 sb.Replace("&lt;/ul&gt;", "</ul>");
                 sb.Replace("&lt;ol&gt;", "<ol>");
                 sb.Replace("&lt;/ol&gt;", "</ol>");
-                sb.Replace("&lt;spanl&gt;", "<span>");
-                sb.Replace("&lt;/spanl&gt;", "</span>");
+                sb.Replace("&lt;span", "<span");
+                sb.Replace("&lt;/span&gt;", "</span>");
                 sb.Replace("&amp;nbsp;", " ");
 
                 topicTitle = sb.ToString();
@@ -187,12 +192,21 @@ namespace BootStrapTest.Admin.HelpTopic
 
             if (submit == topicID)
             {
-                if (topicID > 0)
-                    result.Text = "Successfully updated help topic";
-                else
-                    result.Text = "Successfully added new help topic";
+                var param = HttpUtility.ParseQueryString(Request.QueryString.ToString());
+                String url = Request.Url.AbsolutePath;
 
-                result.CssClass = "bg-success";
+                param.Set("id", topicID.ToString());
+
+                if (topicID > 0)
+                {            
+                    param.Set("message", "Successfully updated help topic");
+                    Response.Redirect(url + "?" + param.ToString());
+                }
+                else
+                {
+                    param.Set("message", "Successfully added new help topic");
+                    Response.Redirect(url + "?" + param.ToString());
+                }
             }
             else
             {
