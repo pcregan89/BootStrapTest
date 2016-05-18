@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace BootStrapTest.Helpers
 {
@@ -20,12 +19,19 @@ namespace BootStrapTest.Helpers
             }
         }
 
+        //Get all help categories
         public IEnumerable<tbl_Help_Category> GetHelpCategories(dbDataContext db)
         {
             return db.tbl_Help_Categories;
         }
 
-        //get Help category based on parent ID
+        //Get all help categories sorted by order
+        public IEnumerable<tbl_Help_Category> GetHelpCategoriesOrdered(dbDataContext db)
+        {
+            return db.tbl_Help_Categories.OrderBy(t => t.Help_Category_Order);
+        }
+
+        //get Help category based on parent ID - default sort
         public List<tbl_Help_Category> GetHelpCategoryChildren(dbDataContext db, int id)
         {
             IQueryable<tbl_Help_Category> list;
@@ -33,6 +39,17 @@ namespace BootStrapTest.Helpers
                 list = db.tbl_Help_Categories.Where(t => t.Help_Category_Parent_ID == id);
             else
                 list = db.tbl_Help_Categories.Where(t => t.Help_Category_Parent_ID == null);
+            return list.ToList();
+        }
+
+        //get Help category based on parent ID sorted by order
+        public List<tbl_Help_Category> GetHelpCategoryChildrenOrdered(dbDataContext db, int id)
+        {
+            IQueryable<tbl_Help_Category> list;
+            if (id != 0)
+                list = db.tbl_Help_Categories.Where(t => t.Help_Category_Parent_ID == id).OrderBy(t => t.Help_Category_Order);
+            else
+                list = db.tbl_Help_Categories.Where(t => t.Help_Category_Parent_ID == null).OrderBy(t => t.Help_Category_Order);
             return list.ToList();
         }
 

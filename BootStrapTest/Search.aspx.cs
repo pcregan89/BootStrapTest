@@ -45,8 +45,8 @@ namespace BootStrapTest
                         foreach (tbl_Help_Topic_Tag item in tags)
                         {
                             tbl_Help_Topic topic = helpTopic.GetHelpTopic(db, item.Help_Topic_ID);
-                            if (!source.Contains(topic))
-                                source.Add(topic);
+                            if (!topics.Contains(topic))
+                                topics.Add(topic);
                         }
                     }
                 }
