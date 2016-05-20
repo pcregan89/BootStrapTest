@@ -5,7 +5,7 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <asp:Panel ID="pnlHome" runat="server" Visible="false">
+    <asp:Panel ID="pnlHome" runat="server" Visible="true">
         <h2>Home</h2>
         Welcome to the help section
         <div class="col-md-9 row" style="width: 100%;">
@@ -23,37 +23,6 @@
             </asp:Repeater>
         </div>
     </asp:Panel>
-    <asp:Panel ID="pnlAccordion" runat="server" Visible="true">
-        <h2>Help Topics</h2>
-        <div id="accordion">
-            <asp:Repeater ID="rptTopics" runat="server" OnItemDataBound="rptTopics_ItemDataBound">
-                <ItemTemplate>
-                    <h3><%#Eval("Help_Topic_Header") %></h3>
-                    <div>
-                        <p><%#Eval("Help_Topic_Text") %></p>
-                        <br />
-                        <!--Hidden labels to store variables for code behind-->
-                        <asp:Label runat="server" ID="lblID" Text='<%#Eval("Help_Topic_ID") %>' Visible="false"></asp:Label>
-                        <asp:Label runat="server" ID="lblHeader" Text='<%#Eval("Help_Topic_Header") %>' Visible="false"></asp:Label>
-                        
-                        <asp:Label runat="server" ID="lblUpdated" Font-Size="11px" Text="Last Updated: "></asp:Label><br />
-                        <asp:Repeater runat="server" ID="rptTags">
-                            <HeaderTemplate>
-                                <i class="fa fa-tags"></i>
-                            </HeaderTemplate>
-                            <ItemTemplate>
-                                <asp:LinkButton runat="server" ID="lnkTag" OnClick="lnkTag_Click" Text='<%#Eval("Help_Topic_Tag_Text") %>'></asp:LinkButton>  |  
-                            </ItemTemplate>
-                            <FooterTemplate><br /></FooterTemplate>
-                        </asp:Repeater>
-                        <i class="fa fa-link"></i>
-                        <asp:LinkButton runat="server" ID="lnkPerm" Text="Permalink" OnClick="lnkPriority_Click"></asp:LinkButton>  |  
-                        <asp:LinkButton runat="server" ID="lnkShare" Text="Share" OnClick="lnkShare_Click"></asp:LinkButton>
-                    </div>
-                </ItemTemplate>
-            </asp:Repeater>
-        </div>
-    </asp:Panel>
 </asp:Content>
 <asp:Content ContentPlaceHolderID="javascript" runat="server">
     <script src="<%= ResolveUrl("~/Scripts/jquery-1.12.2.min.js") %>"></script>
@@ -67,11 +36,5 @@
             $(this).css("background-color", colors[i++]); // increment here
             if (i == 5) i = 0; // reset the counter here
         });
-    </script>
-    <script>
-        //Collapse accordion panel
-        $(function() {
-            $("#accordion").accordion({ collapsible: true, active: false });
-      });
     </script>
 </asp:Content>

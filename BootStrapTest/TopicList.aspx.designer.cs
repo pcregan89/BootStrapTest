@@ -10,24 +10,24 @@
 namespace BootStrapTest {
     
     
-    public partial class Home {
+    public partial class TopicList {
         
         /// <summary>
-        /// pnlHome control.
+        /// pnlAccordion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlHome;
+        protected global::System.Web.UI.WebControls.Panel pnlAccordion;
         
         /// <summary>
-        /// rptPriority control.
+        /// rptTopics control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptPriority;
+        protected global::System.Web.UI.WebControls.Repeater rptTopics;
     }
 }

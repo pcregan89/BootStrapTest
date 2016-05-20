@@ -60,24 +60,28 @@
         <div class="row">
             <div class="col-md-3">
                 <!--Menu goes here-->
+                <asp:Label ID="lblPageID" runat="server" Visible="false"></asp:Label>
                 <ul class="list-group product-category-all">
-                    <li class="list-group-item"><span>
-                        <i class="fa fa-home icon-data"></i></span>
-                        <a href="/Home.aspx">Home</a>
+                    <li class="list-group-item">
+                        <%--<span><i class="fa fa-home icon-data"></i></span>--%>
+                        <%--<a href="/Home.aspx">Home</a>--%>
+                        <asp:Label runat="server" ID="lblHeadIcon" CssClass="fa fa-home"></asp:Label><span style="padding-left:5px;"></span>
+                        <asp:HiddenField runat="server" ID="hfID" />
+                        <asp:LinkButton runat="server" ID="lnkHome" OnClick="lnkHome_Click"></asp:LinkButton>
                     </li>
-                    <asp:Repeater runat="server" ID="rptTopics" OnItemDataBound="rptTopics_ItemDataBound">
+                    <asp:Repeater runat="server" ID="rptCategory" OnItemDataBound="rptCategory_ItemDataBound">
                         <ItemTemplate>
                             <div class="list-group-item">
                                 <asp:Label runat="server" ID="lblIcon" CssClass="fa fa-plus"></asp:Label><span style="padding-left:5px;"></span>
                                 <asp:Label ID="lblID" runat="server" Visible="false" Text='<%#Eval("Help_Category_ID") %>'></asp:Label>
                                 <asp:LinkButton runat="server" ID="lnkCategory" OnClick="lnkCategory_Click" Text='<%#Eval("Help_Category_Name") %>'></asp:LinkButton>
                             </div>
-                            <asp:Repeater runat="server" ID="rptChild">
+                            <asp:Repeater runat="server" ID="rptChild" Visible="false">
                                 <ItemTemplate>
                                     <div class="menu-child">
                                             <i class="fa fa-angle-right icon-data fa-fw"></i>
-                                        <asp:Label ID="lblChildID" runat="server" Visible="false" Text='<%#Eval("Help_Category_ID") %>'></asp:Label>
-                                        <asp:LinkButton runat="server" ID="lnkChildCat" OnClick="lnkChildCat_Click" Text='<%#Eval("Help_Category_Name") %>'></asp:LinkButton>
+                                        <asp:Label ID="lblID" runat="server" Visible="false" Text='<%#Eval("Help_Category_ID") %>'></asp:Label>
+                                        <asp:LinkButton runat="server" ID="lnkChildCat" OnClick="lnkCategory_Click" Text='<%#Eval("Help_Category_Name") %>'></asp:LinkButton>
                                     </div>
                                 </ItemTemplate>
                             </asp:Repeater>
@@ -90,7 +94,6 @@
                     <div class="col-md-9">
                         <div>
                             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-                                <asp:Label ID="lblPageID" runat="server" Visible="true"></asp:Label>
                             </asp:ContentPlaceHolder>
                         </div>
                     </div>
