@@ -20,8 +20,8 @@ namespace BootStrapTest
                 id = Convert.ToInt32(HttpContext.Current.Request.QueryString.Get("id"));
             }
 
-                rptCategory.DataSource = helper.GetHelpCategoryChildrenOrdered(db, id);
-                rptCategory.DataBind();
+            rptCategory.DataSource = helper.GetHelpCategoryChildrenOrdered(db, id);
+            rptCategory.DataBind();
 
             Label lblIcon = (Label)FindControl("lblHeadIcon");
             LinkButton lnkHome = (LinkButton)FindControl("lnkHome");
@@ -52,8 +52,8 @@ namespace BootStrapTest
             LinkButton lnk = (LinkButton)sender;
             RepeaterItem item = (RepeaterItem)lnk.NamingContainer;
             Label lblID = (Label)item.FindControl("lblID");
-            //Label lblPageID = (Label)FindControl("lblPageID");
-            //lblPageID.Text = lblID.Text;
+            Label lblPageID = (Label)FindControl("lblPageID");
+            lblPageID.Text = lblID.Text;
             Response.Redirect("/TopicList.aspx?id=" + lblID.Text);
         }
 

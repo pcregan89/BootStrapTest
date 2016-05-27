@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace BootStrapTest
@@ -16,30 +13,17 @@ namespace BootStrapTest
         protected void Page_Load(object sender, EventArgs e)
         {
             int id = 0;
-            if (!IsPostBack)
+            if (HttpContext.Current.Request.QueryString.Get("id") != null)
             {
-                if (HttpContext.Current.Request.QueryString.Get("id") != null)
-                {
-                    id = Convert.ToInt32(HttpContext.Current.Request.QueryString.Get("id"));
-                }
-
-                if (id != 0)
-                {
-                    Repeater rptTopics = (Repeater)Master.FindControl("ContentPlaceHolder1").FindControl("rptTopics");
-                    rptTopics.DataSource = helper.GetHelpTopicCategory(db, id);
-                    //rptTopics.DataSource = helper.GetHelpTopics(db);
-                    rptTopics.DataBind();
-
-                }
+                id = Convert.ToInt32(HttpContext.Current.Request.QueryString.Get("id"));
             }
-        }
 
-        protected void lnkPriority_Click(object sender, EventArgs e)
-        {
-            LinkButton lnk = (LinkButton)sender;
-            RepeaterItem item = (RepeaterItem)lnk.NamingContainer;
-            Label lblID = (Label)item.FindControl("lblID");
-            Response.Redirect("/HelpTopic.aspx?id=" + lblID.Text);
+            if (id != 0)
+            {
+                Repeater rptTopics = (Repeater)Master.FindControl("ContentPlaceHolder1").FindControl("rptTopics");
+                rptTopics.DataSource = helper.GetHelpTopicCategory(db, id);
+                rptTopics.DataBind();
+            }
         }
 
         protected void lnkShare_Click(object sender, EventArgs e)
@@ -71,12 +55,6 @@ namespace BootStrapTest
                 if (rptTags.Items.Count == 0)
                     rptTags.Visible = false;
             }
-        }
-
-        protected void lnkTag_Click(object sender, EventArgs e)
-        {
-            LinkButton lnkTag = (LinkButton)sender;
-            Response.Redirect("/Search.aspx?keyword=" + lnkTag.Text);
         }
     }
 }
