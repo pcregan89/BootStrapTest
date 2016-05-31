@@ -152,14 +152,14 @@ namespace BootStrapTest
                 tbl_Help_Topic item = helper.GetHelpTopic(db, relatedTopicID);
 
                 Label related = (Label)e.Item.FindControl("relatedTopics");
-                related.Text = "<a href=\"helptopic.aspx?id="+relatedTopicID.ToString()+"\">" + item.Help_Topic_Header + "&body=" + item.Help_Topic_Text + "</a>";
+                related.Text = "<a href=\"helptopic.aspx?id="+relatedTopicID.ToString()+"\">" + item.Help_Topic_Header + "</a>";
             }
         }
 
         protected void btnShare_Click(object sender, EventArgs e)
         {
             helper.UpdateHelpTopicShareCount(db, topicID);
-            Response.Redirect("mailto:?subject=" + helpTopicTitle.Text + " - Meat Connected");  
+            Response.Redirect("mailto:?subject=" + helpTopicTitle.Text + " - Meat Connected" + "&body=" + helpTopicText.Text);  
         }
 
     }
