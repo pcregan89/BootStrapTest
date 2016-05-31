@@ -3,13 +3,14 @@
 
 <asp:Content ContentPlaceHolderId="ContentPlaceHolder1" runat="server">
         <asp:ScriptManager ID="scr" runat="server">
-        </asp:ScriptManager>
+        </asp:ScriptManager> 
         <h2>List of Help Topics</h2>
+    
         <button type="button" class="btn btn-primary" onclick="javascript:window:location.href='../../Admin/HelpTopic/form.aspx?id=-1'; return false;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Add New</button>
         <button type="button" id="deleteButton" class="btn btn-danger" data-toggle="modal" data-target="#dlModal"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
-        <table class="table table-hover table-responsive" style="border-top:hidden;">
-            
-            
+    <p style="display:inline">Filter By Category:</p>
+    <asp:DropDownList ID="ddlCategory" runat="server" CssClass="btn btn-default dropdown-toggle" AutoPostBack="true"></asp:DropDownList>
+    <table class="table table-hover table-responsive" style="border-top:hidden;">          
             <asp:Repeater ID="rptHelpTopic" runat="server" OnItemDataBound="rptHelpTopic_ItemDataBound" >
 
                 <HeaderTemplate>

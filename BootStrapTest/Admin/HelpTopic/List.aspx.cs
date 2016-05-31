@@ -20,14 +20,38 @@ namespace BootStrapTest.Admin.HelpTopic
             {
                 rptHelpTopic.DataSource = helper.GetHelpTopics(db);
                 rptHelpTopic.DataBind();
+
+                ddlCategory.Items.Add("--Select--");
+                foreach (tbl_Help_Category cat in helperCat.GetHelpCategories(db))
+                {
+                    ListItem li = new ListItem();
+                    li.Text = cat.Help_Category_Name;
+                    li.Value = cat.Help_Category_ID.ToString();
+
+                    ddlCategory.Items.Add(li);
+                }
             }
-
-            if (HttpContext.Current.Session["deleteItems"] != null)
-                deleteItems = (List<int>)HttpContext.Current.Session["deleteItems"];
             else
-                deleteItems = new List<int>();
+            {
+                //drop down list should be the only thing that causes a posback
+                if (ddlCategory.SelectedIndex > 0)
+                {
+                    rptHelpTopic.DataSource = helper.GetHelpTopicCategory(db, Convert.ToInt32(ddlCategory.SelectedValue));
+                    rptHelpTopic.DataBind();
+                }
+                else
+                {
+                    rptHelpTopic.DataSource = helper.GetHelpTopics(db);
+                    rptHelpTopic.DataBind();
+                }
 
-            Title = "List of Help Topics";
+                if (HttpContext.Current.Session["deleteItems"] != null)
+                    deleteItems = (List<int>)HttpContext.Current.Session["deleteItems"];
+                else
+                    deleteItems = new List<int>();
+
+                Title = "List of Help Topics";
+            }
         }
 
         protected void rptHelpTopic_ItemDataBound(object sender, RepeaterItemEventArgs e)
