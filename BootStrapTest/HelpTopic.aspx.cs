@@ -11,11 +11,14 @@ namespace BootStrapTest
     {
         int topicID;
         tbl_Help_Topic tht;
+        tbl_Help_Topic_Tag thtt;
         Helpers.HelpTopic helper = new Helpers.HelpTopic();
         Helpers.HelpCategory helperCat = new Helpers.HelpCategory();
+        Helpers.HelpTopicTag helperTag = new Helpers.HelpTopicTag();
         dbDataContext db = new dbDataContext();
         protected Boolean invalidHelpTopic;
         protected Boolean hasRelatedTopics;
+        protected Boolean hasTags;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -42,6 +45,7 @@ namespace BootStrapTest
                     try
                     {
                         tht = helper.GetHelpTopic(db, topicID);
+                        List<tbl_Help_Topic_Tag> tags = helperTag.GetHelpTopicTagTopic(db, topicID);
                         tbl_Help_Category thc = helperCat.GetHelpCategory(db, tht.Help_Category_ID);
 
                         helpTopicText.Text = tht.Help_Topic_Text;
@@ -49,8 +53,20 @@ namespace BootStrapTest
                         helpTopicCategory.Text = "Category: " + "<strong>" + thc.Help_Category_Name + "</strong>";
                         lblLastUpdated.Text = "Last Updated: " + tht.Help_Topic_Last_Updated.Value.ToShortDateString();
 
-                        helper.UpdateHelpTopicViewCount(db, topicID);
+                        if (tags.Count != 0)
+                        {
+                            hasTags = true;
+                            lblTags.Text = "<strong>Tags:</strong>";
 
+                            foreach (tbl_Help_Topic_Tag tag in tags)
+                            {
+                                lblTags.Text += "<a href=\"Search.aspx?keyword=" + tag.Help_Topic_Tag_Text + "\">" + tag.Help_Topic_Tag_Text + "</a>;";
+                                
+                            }
+                            
+                        }
+
+                        helper.UpdateHelpTopicViewCount(db, topicID);
                         Helpers.HelpTopicRelated htr = new Helpers.HelpTopicRelated();
                         List<tbl_Help_Topic_Related> relatedTopics = htr.GetHelpTopicRelatedTopic(db, topicID);
 
@@ -136,7 +152,7 @@ namespace BootStrapTest
                 tbl_Help_Topic item = helper.GetHelpTopic(db, relatedTopicID);
 
                 Label related = (Label)e.Item.FindControl("relatedTopics");
-                related.Text = "<a href=\"helptopic.aspx?id="+relatedTopicID.ToString()+"\">" + item.Help_Topic_Header + "</a>";
+                related.Text = "<a href=\"helptopic.aspx?id="+relatedTopicID.ToString()+"\">" + item.Help_Topic_Header + "&body=" + item.Help_Topic_Text + "</a>";
             }
         }
 

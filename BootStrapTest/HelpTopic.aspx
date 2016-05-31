@@ -28,6 +28,12 @@
                 </ol>
             </div>
         <% } %>
+
+        <% if (hasTags) {%>
+        <br />
+        <asp:Label ID="lblTags" runat="server"></asp:Label>
+        <% } %>
+        
       
         <% if (!invalidHelpTopic) { %> 
         <div class="row">
