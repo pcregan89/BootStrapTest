@@ -13,15 +13,20 @@ namespace BootStrapTest
         protected void Page_Load(object sender, EventArgs e)
         {
             int id = 0;
-            if (HttpContext.Current.Request.QueryString.Get("id") != null)
+            if (HttpContext.Current.Request.QueryString.Get("CatID") != null)
             {
-                id = Convert.ToInt32(HttpContext.Current.Request.QueryString.Get("id"));
+                id = Convert.ToInt32(HttpContext.Current.Request.QueryString.Get("CatID"));
             }
 
+            Repeater rptTopics = (Repeater)Master.FindControl("ContentPlaceHolder1").FindControl("rptTopics");
             if (id != 0)
             {
-                Repeater rptTopics = (Repeater)Master.FindControl("ContentPlaceHolder1").FindControl("rptTopics");
                 rptTopics.DataSource = helper.GetHelpTopicCategory(db, id);
+                rptTopics.DataBind();
+            }
+            else
+            {
+                rptTopics.DataSource = helper.GetHelpTopics(db);
                 rptTopics.DataBind();
             }
         }

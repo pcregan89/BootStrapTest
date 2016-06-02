@@ -24,12 +24,12 @@
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script type="text/javascript">
         // Add background color to tiles
-        var colors = ["#8398cf", "#83cfcb", "#8acf83", "#cfae83", "#cf8383"];
+        var colors = ["#8398cf", "#cf8383", "#8acf83", "#cfae83"];
 
         var i = 0;
         $(".home-tiles").each(function () {
             $(this).css("background-color", colors[i++]); // increment here
-            if (i == 5) i = 0; // reset the counter here
+            if (i == 4) i = 0; // reset the counter here
         });
     </script>
 </asp:Content>

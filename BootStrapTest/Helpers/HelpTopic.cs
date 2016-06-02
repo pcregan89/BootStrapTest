@@ -38,6 +38,24 @@ namespace BootStrapTest.Helpers
             IQueryable<tbl_Help_Topic> list = db.tbl_Help_Topics.Where(t => t.Help_Topic_Priority != null).OrderBy(t => t.Help_Topic_Priority);
             return list.ToList();
         }
+        //Get topics based on likes
+        public List<tbl_Help_Topic> GetHelpTopicLike(dbDataContext db)
+        {
+            IQueryable<tbl_Help_Topic> list = db.tbl_Help_Topics.Where(t => t.Help_Topic_Likes != 0).OrderByDescending(t => t.Help_Topic_Likes);
+            return list.ToList();
+        }
+        //Get topics based on shares
+        public List<tbl_Help_Topic> GetHelpTopicShare(dbDataContext db)
+        {
+            IQueryable<tbl_Help_Topic> list = db.tbl_Help_Topics.Where(t => t.Help_Topic_Share_Count != 0).OrderByDescending(t => t.Help_Topic_Share_Count);
+            return list.ToList();
+        }
+        //Get topics based on views
+        public List<tbl_Help_Topic> GetHelpTopicViews(dbDataContext db)
+        {
+            IQueryable<tbl_Help_Topic> list = db.tbl_Help_Topics.Where(t => t.Help_Topic_View_Count != 0).OrderByDescending(t => t.Help_Topic_View_Count);
+            return list.ToList();
+        }
 
         //Add or edit topic
         public int AddUpdateHelpTopic(dbDataContext db, int id, string header, string text, int cat, bool loggedOut, int? priority)

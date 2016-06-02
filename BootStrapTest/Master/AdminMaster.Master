@@ -10,16 +10,17 @@
     <link href="../Content/bootstrap.css" rel="stylesheet" />
     <link href="../Content/Site.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
+    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
 </head>
 <body>
     <form runat="server">
     <nav class="navbar navbar-inverse navbar-top" style="margin-top: -50px;">
         <div class="container">
             <div class="navbar-header">
-                <a href="../Home.aspx" style="color: #ffffff; font-size: 18px;"><img src="/Images/mcicon.jpg"/>  Help Centre</a></div>
+                <a href="/Home.aspx" style="color: #ffffff; font-size: 18px;"><img src="/Images/mcicon.jpg"/>  Help Centre</a></div>
             <div id="navbar" class="navbar-collapse collapse">
                 <div class="navbar-form navbar-right">
-                    <a href="../Admin/AdminHome.aspx" style="color:white; margin-right:10px;">Admin Home</a>
+                    <a href="/Admin/AdminHome.aspx" style="color:white; margin-right:10px;">Admin Home</a>
                     <button type="submit" class="btn btn-primary">Sign in</button>
                 </div>
             </div>
@@ -36,8 +37,8 @@
                         <asp:Panel runat="server" ID="pnlSearch" CssClass="input-group" DefaultButton="btnSearch">
                             <asp:TextBox runat="server" ID="txtSearch" CssClass="search-query form-control" KeyDown="OnKeyDownHandler" placeholder="Search" Width="600px" Height="50px"></asp:TextBox>
                             <span class="input-group-btn" style="vertical-align:middle;">
-                                <asp:LinkButton ID="btnSearch" runat="server" CssClass="btn btn-primary btn-align" Height="50px" OnClick="btnSearch_Click">
-                                    <i class="fa fa-search"></i>
+                                <asp:LinkButton ID="btnSearch" runat="server" CssClass="btn btn-primary" Height="50px" OnClick="btnSearch_Click">
+                                    <i class="fa fa-search" style="margin-top:10px;"></i>
                                 </asp:LinkButton>
                             </span>
                         </asp:Panel>
@@ -80,7 +81,7 @@
             </div>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-9">
+                    <div class="col-md-9" style="min-height:350px;">
                         <div>
                             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                             </asp:ContentPlaceHolder>
@@ -88,16 +89,15 @@
                     </div>
                 </div>
             </div>
-
-            <hr>
+            <hr/>
         </div>
      </div>
-        <!-- /container -->
-        <footer class="footer">
-            <div class="container">
-                <%--<p class="text-muted">Place sticky footer content here.</p>--%>
-            </div>
-        </footer>
+    <!-- /container -->
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted">&copy; Meat Connected Ltd 2015. All rights reserved.</p>
+        </div>
+    </footer>
 
 
         <!-- Bootstrap core JavaScript

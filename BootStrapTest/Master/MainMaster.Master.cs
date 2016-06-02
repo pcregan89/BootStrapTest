@@ -15,9 +15,9 @@ namespace BootStrapTest
             
 
             int id = 0;
-            if (HttpContext.Current.Request.QueryString.Get("id") != null)
+            if (HttpContext.Current.Request.QueryString.Get("CatID") != null)
             {
-                id = Convert.ToInt32(HttpContext.Current.Request.QueryString.Get("id"));
+                id = Convert.ToInt32(HttpContext.Current.Request.QueryString.Get("CatID"));
             }
 
             rptCategory.DataSource = helper.GetHelpCategoryChildrenOrdered(db, id);
@@ -84,7 +84,7 @@ namespace BootStrapTest
             Label lblID = (Label)item.FindControl("lblID");
             Label lblPageID = (Label)FindControl("lblPageID");
             lblPageID.Text = lblID.Text;
-            Response.Redirect("/TopicList.aspx?id=" + lblID.Text);
+            Response.Redirect("/TopicList.aspx?CatID=" + lblID.Text);
         }
 
         protected void rptCategory_ItemDataBound(object sender, RepeaterItemEventArgs e)
@@ -131,7 +131,7 @@ namespace BootStrapTest
                 if (parent == 0)
                     Response.Redirect("/Home.aspx");
                 else
-                    Response.Redirect("/TopicList.aspx?id=" + parent);
+                    Response.Redirect("/TopicList.aspx?CatID=" + parent);
             }
         }
     }
