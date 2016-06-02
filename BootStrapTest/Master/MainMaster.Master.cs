@@ -29,9 +29,39 @@ namespace BootStrapTest
             if (id != 0)
             {
                 lblIcon.CssClass = "fa fa-level-up fa-flip-horizontal";
-                tbl_Help_Category cat = helper.GetHelpCategory(db, id);
-                lnkHome.Text = cat.Help_Category_Name;
-                hfID.Value = cat.Help_Category_ID.ToString();
+                Helpers.HelpTopic helperTopic = new Helpers.HelpTopic();
+                tbl_Help_Topic topic = new tbl_Help_Topic();
+                tbl_Help_Category cat = new tbl_Help_Category();
+
+                if (this.Page is HelpTopic)
+                {
+                    topic = helperTopic.GetHelpTopic(db, id);
+                }
+                else
+                {
+                    cat = helper.GetHelpCategory(db, id);
+                }
+                  
+
+                
+                if (cat != null)
+                {
+                    if (cat.Help_Category_ID > 0)
+                    {
+                        lnkHome.Text = cat.Help_Category_Name;
+                        hfID.Value = cat.Help_Category_ID.ToString();
+                    }
+                }
+                else
+                {
+                    cat = helper.GetHelpCategory(db, topic.Help_Category_ID);
+
+                    if (cat != null)
+                    {
+                        lnkHome.Text = cat.Help_Category_Name;
+                        hfID.Value = cat.Help_Category_ID.ToString();
+                    }
+                }
             }
             else
             {
