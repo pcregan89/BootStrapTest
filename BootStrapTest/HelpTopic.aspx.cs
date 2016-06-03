@@ -19,12 +19,14 @@ namespace BootStrapTest
         protected Boolean invalidHelpTopic;
         protected Boolean hasRelatedTopics;
         protected Boolean hasTags;
+        String message;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             try
             {
                 topicID = Convert.ToInt32(HttpContext.Current.Request.QueryString.Get("id"));
+                message = HttpContext.Current.Request.QueryString.Get("message");
 
                 if (topicID == 0)
                     invalidHelpTopic = true;
@@ -37,6 +39,7 @@ namespace BootStrapTest
                 invalidHelpTopic = true;
             }
 
+            result.Text = message;
 
             if (!Page.IsPostBack)
             {
@@ -101,39 +104,53 @@ namespace BootStrapTest
 
         protected void btnLike_Click(object sender, EventArgs e)
         {
+            var param = HttpUtility.ParseQueryString(Request.QueryString.ToString());
+            String url = Request.Url.AbsolutePath;
+
+            param.Set("id", topicID.ToString());
+
             if (HttpContext.Current.Session["clickedButton"] == null)
             {
                 bool updated = helper.UpdateHelpTopicLikeCount(db, topicID);
 
                 if (updated)
                 {
-                    result.Text = "Thank you for your feedback";
+                    param.Set("message", "Thank you for your feedback");
                     HttpContext.Current.Session["clickedButton"] = true;
                 }
             }
             else
             {
-                result.Text = "You have already given feedback for this topic";
+                param.Set("message", "You have already given feedback for this topic");
             }
+
+            Response.Redirect(url + "?" + param.ToString());
 
         }
 
         protected void btnDislike_Click(object sender, EventArgs e)
         {
+            var param = HttpUtility.ParseQueryString(Request.QueryString.ToString());
+            String url = Request.Url.AbsolutePath;
+
+            param.Set("id", topicID.ToString());
+
             if (HttpContext.Current.Session["clickedButton"] == null)
             {
                 bool updated = helper.UpdateHelpTopicDislikeCount(db, topicID);
 
                 if (updated)
                 {
-                    result.Text = "Thank you for your feedback";
+                    param.Set("message","Thank you for your feedback");
                     HttpContext.Current.Session["clickedButton"] = true;
                 }
             }
             else
             {
-                result.Text = "You have already given feedback for this topic";
+                param.Set("message", "You have already given feedback for this topic");
             }
+
+            Response.Redirect(url + "?" + param.ToString());
         }
 
         protected void rptRelatedHelpTopics_ItemDataBound(object sender, RepeaterItemEventArgs e)
