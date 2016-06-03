@@ -1,9 +1,11 @@
 ﻿<%@ Page Title="Help Topics" Language="C#" MasterPageFile="~/Master/MainMaster.Master" AutoEventWireup="true" CodeBehind="TopicList.aspx.cs" Inherits="BootStrapTest.TopicList" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"/>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h2>Help Topics</h2>
+        <asp:Label ID="lblWarning" runat="server" Visible="false"></asp:Label>
     <div id="accordion">
         <asp:Repeater ID="rptTopics" runat="server" OnItemDataBound="rptTopics_ItemDataBound">
             <ItemTemplate>
@@ -14,7 +16,7 @@
                     <!--Hidden labels to store variables for code behind-->
                     <asp:Label runat="server" ID="lblID" Text='<%#Eval("Help_Topic_ID") %>' Visible="false"></asp:Label>
                     <asp:Label runat="server" ID="lblHeader" Text='<%#Eval("Help_Topic_Header") %>' Visible="false"></asp:Label>
-                        
+
                     <asp:Label runat="server" ID="lblUpdated" Font-Size="11px" Text="Last Updated: "></asp:Label><br />
                     <asp:Repeater runat="server" ID="rptTags">
                         <HeaderTemplate>
@@ -23,10 +25,13 @@
                         <ItemTemplate>
                             <a href='Search.aspx?keyword=<%#Eval("Help_Topic_Tag_Text") %>'><%#Eval("Help_Topic_Tag_Text") %></a>  |  
                         </ItemTemplate>
-                        <FooterTemplate><br /></FooterTemplate>
+                        <FooterTemplate>
+                            <br />
+                        </FooterTemplate>
                     </asp:Repeater>
-                    <i class="fa fa-link"></i> <a href='HelpTopic.aspx?id=<%#Eval("Help_Topic_ID") %>'>Permalink</a>  |  
-                    <i class="fa fa-envelope-o"></i> <asp:LinkButton runat="server" ID="lnkShare" Text="Share" OnClick="lnkShare_Click"></asp:LinkButton>                    
+                    <i class="fa fa-link"></i>   <a href='HelpTopic.aspx?id=<%#Eval("Help_Topic_ID") %>'>Permalink</a>  |  
+                    <i class="fa fa-envelope-o"></i>
+                    <asp:LinkButton runat="server" ID="lnkShare" Text="Share" OnClick="lnkShare_Click"></asp:LinkButton>
                 </div>
             </ItemTemplate>
         </asp:Repeater>
@@ -37,8 +42,8 @@
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script>
         //Collapse accordion panel
-        $(function() {
+        $(function () {
             $("#accordion").accordion({ collapsible: true, active: false });
-      });
+        });
     </script>
 </asp:Content>

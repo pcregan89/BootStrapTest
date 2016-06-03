@@ -31,17 +31,13 @@ namespace BootStrapTest.Admin.HelpTopicTags
                 Repeater rptTags = (Repeater)Master.FindControl("ContentPlaceHolder1").FindControl("rptTags");
                 rptTags.DataSource = helpTag.GetHelpTopicTagTopic(db, id);
                 rptTags.DataBind();
+                if (rptTags.Items.Count == 0)
+                {
+                    rptTags.Visible = false;
+                    lblWarning.Text = "There are no tags for this topic";
+                    lblWarning.Visible = true;
+                }
             }
-
-            //Get unique tag text values
-            //List<tbl_Help_Topic_Tag> autocomplete = helpTag.GetDistinctHelpTopics(db);
-            //string[] tags = new string[autocomplete.Count];
-            //int count = 0;
-            //while (count < autocomplete.Count)
-            //{
-            //    tags[count] = autocomplete[count].Help_Topic_Tag_Text;
-            //    count++;
-            //}
         }
 
         protected void btnAddTag_Click(object sender, EventArgs e)

@@ -6,7 +6,8 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h2>Home</h2>
-    Welcome to the help section
+    Welcome to the help section<br />
+    <%--<b>Frequently Asked Questions</b>--%>
     <div class="col-md-9 row" style="width: 100%;">
         <asp:Repeater runat="server" ID="rptPriority">
             <ItemTemplate>

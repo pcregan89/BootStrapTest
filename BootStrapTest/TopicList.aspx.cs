@@ -29,6 +29,12 @@ namespace BootStrapTest
                 rptTopics.DataSource = helper.GetHelpTopics(db);
                 rptTopics.DataBind();
             }
+            if (rptTopics.Items.Count == 0)
+            {
+                Label lblWarning = (Label)Master.FindControl("ContentPlaceHolder1").FindControl("lblWarning");
+                lblWarning.Text = "There are no topics for the selected category";
+                lblWarning.Visible = true;
+            }
         }
 
         protected void lnkShare_Click(object sender, EventArgs e)

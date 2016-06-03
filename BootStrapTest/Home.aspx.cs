@@ -14,16 +14,16 @@ namespace BootStrapTest
         {
             Repeater rptPriority = (Repeater)Master.FindControl("ContentPlaceHolder1").FindControl("rptPriority");
             //Sort by priority
-            rptPriority.DataSource = helper.GetHelpTopicPriority(db);
+            rptPriority.DataSource = helper.GetHelpTopicPriority(db, 9);
 
             //Sort by views
-            //rptPriority.DataSource = helper.GetHelpTopicViews(db);
+            //rptPriority.DataSource = helper.GetHelpTopicViews(db, 9);
 
             //Sort by shares
-            //rptPriority.DataSource = helper.GetHelpTopicShare(db);
+            //rptPriority.DataSource = helper.GetHelpTopicShare(db, 9);
 
             //Sort by likes
-            //rptPriority.DataSource = helper.GetHelpTopicLike(db);
+            //rptPriority.DataSource = helper.GetHelpTopicLike(db, 9);
             rptPriority.DataBind();
 
         }

@@ -78,6 +78,17 @@ namespace BootStrapTest.Admin.HelpCategory
                 valid = false;
                 msg += "Name must be between 1 and 50 characters<br/>";
             }
+            else
+            {
+                foreach (tbl_Help_Category item in helper.GetHelpCategories(db))
+                {
+                    if (item.Help_Category_Name == txtName.Text && item.Help_Category_ID != id)
+                    {
+                        valid = false;
+                        msg += "Category name is already in use<br/>";
+                    }
+                }
+            }
 
             //Check parent ID
             int parent;

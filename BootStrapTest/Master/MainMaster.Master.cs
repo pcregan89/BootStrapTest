@@ -26,42 +26,47 @@ namespace BootStrapTest
             Label lblIcon = (Label)FindControl("lblHeadIcon");
             LinkButton lnkHome = (LinkButton)FindControl("lnkHome");
             HiddenField hfID = (HiddenField)FindControl("hfID");
+
+            //check ID & adjust top menu item
             if (id != 0)
             {
                 lblIcon.CssClass = "fa fa-level-up fa-flip-horizontal";
-                Helpers.HelpTopic helperTopic = new Helpers.HelpTopic();
-                tbl_Help_Topic topic = new tbl_Help_Topic();
-                tbl_Help_Category cat = new tbl_Help_Category();
+                tbl_Help_Category cat = helper.GetHelpCategory(db, id);
+                lnkHome.Text = cat.Help_Category_Name;
+                hfID.Value = cat.Help_Category_ID.ToString();
+                //Helpers.HelpTopic helperTopic = new Helpers.HelpTopic();
+                //tbl_Help_Topic topic = new tbl_Help_Topic();
+                //tbl_Help_Category cat = new tbl_Help_Category();
 
-                if (this.Page is HelpTopic)
-                {
-                    topic = helperTopic.GetHelpTopic(db, id);
-                }
-                else
-                {
-                    cat = helper.GetHelpCategory(db, id);
-                }
-                  
+                //if (this.Page is HelpTopic)
+                //{
+                //    topic = helperTopic.GetHelpTopic(db, id);
+                //}
+                //else
+                //{
+                //    cat = helper.GetHelpCategory(db, id);
+                //}
 
-                
-                if (cat != null)
-                {
-                    if (cat.Help_Category_ID > 0)
-                    {
-                        lnkHome.Text = cat.Help_Category_Name;
-                        hfID.Value = cat.Help_Category_ID.ToString();
-                    }
-                }
-                else
-                {
-                    cat = helper.GetHelpCategory(db, topic.Help_Category_ID);
 
-                    if (cat != null)
-                    {
-                        lnkHome.Text = cat.Help_Category_Name;
-                        hfID.Value = cat.Help_Category_ID.ToString();
-                    }
-                }
+
+                //if (cat != null)
+                //{
+                //    if (cat.Help_Category_ID > 0)
+                //    {
+                //        lnkHome.Text = cat.Help_Category_Name;
+                //        hfID.Value = cat.Help_Category_ID.ToString();
+                //    }
+                //}
+                //else
+                //{
+                //    cat = helper.GetHelpCategory(db, topic.Help_Category_ID);
+
+                //    if (cat != null)
+                //    {
+                //        lnkHome.Text = cat.Help_Category_Name;
+                //        hfID.Value = cat.Help_Category_ID.ToString();
+                //    }
+                //}
             }
             else
             {
@@ -69,6 +74,12 @@ namespace BootStrapTest
                 lnkHome.Text = "Home";
             }
 
+            //Place keyword in search bar
+            if (HttpContext.Current.Request.QueryString.Get("keyword") != null)
+            {
+                TextBox txtSearch = (TextBox)FindControl("txtSearch");
+                txtSearch.Text = HttpContext.Current.Request.QueryString.Get("keyword").ToString();
+            }
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
