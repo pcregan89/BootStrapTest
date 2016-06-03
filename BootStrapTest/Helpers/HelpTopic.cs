@@ -33,28 +33,76 @@ namespace BootStrapTest.Helpers
         }
 
         //Get topics based on priority
-        public List<tbl_Help_Topic> GetHelpTopicPriority(dbDataContext db)
+        public List<tbl_Help_Topic> GetHelpTopicPriority(dbDataContext db, int no)
         {
             IQueryable<tbl_Help_Topic> list = db.tbl_Help_Topics.Where(t => t.Help_Topic_Priority != null).OrderBy(t => t.Help_Topic_Priority);
-            return list.ToList();
+            //CHeck if number is limited, if yes return number, else return all
+            if (no > 0)
+            {
+                List<tbl_Help_Topic> range = list.ToList();
+                while (no < range.Count())
+                {
+                    range.RemoveAt(no);
+                    no++;
+                }
+                return range;
+            }
+            else
+                return list.ToList();
         }
         //Get topics based on likes
-        public List<tbl_Help_Topic> GetHelpTopicLike(dbDataContext db)
+        public List<tbl_Help_Topic> GetHelpTopicLike(dbDataContext db, int no)
         {
             IQueryable<tbl_Help_Topic> list = db.tbl_Help_Topics.Where(t => t.Help_Topic_Likes != 0).OrderByDescending(t => t.Help_Topic_Likes);
-            return list.ToList();
+            //CHeck if number is limited, if yes return number, else return all
+            if (no > 0)
+            {
+                List<tbl_Help_Topic> range = list.ToList();
+                while (no < range.Count())
+                {
+                    range.RemoveAt(no);
+                    no++;
+                }
+                return range;
+            }
+            else
+                return list.ToList();
         }
         //Get topics based on shares
-        public List<tbl_Help_Topic> GetHelpTopicShare(dbDataContext db)
+        public List<tbl_Help_Topic> GetHelpTopicShare(dbDataContext db, int no)
         {
             IQueryable<tbl_Help_Topic> list = db.tbl_Help_Topics.Where(t => t.Help_Topic_Share_Count != 0).OrderByDescending(t => t.Help_Topic_Share_Count);
-            return list.ToList();
+            //CHeck if number is limited, if yes return number, else return all
+            if (no > 0)
+            {
+                List<tbl_Help_Topic> range = list.ToList();
+                while (no < range.Count())
+                {
+                    range.RemoveAt(no);
+                    no++;
+                }
+                return range;
+            }
+            else
+                return list.ToList();
         }
         //Get topics based on views
-        public List<tbl_Help_Topic> GetHelpTopicViews(dbDataContext db)
+        public List<tbl_Help_Topic> GetHelpTopicViews(dbDataContext db, int no)
         {
             IQueryable<tbl_Help_Topic> list = db.tbl_Help_Topics.Where(t => t.Help_Topic_View_Count != 0).OrderByDescending(t => t.Help_Topic_View_Count);
-            return list.ToList();
+            //CHeck if number is limited, if yes return number, else return all
+            if (no > 0)
+            {
+                List<tbl_Help_Topic> range = list.ToList();
+                while (no < range.Count())
+                {
+                    range.RemoveAt(no);
+                    no++;
+                }
+                return range;
+            }
+            else
+                return list.ToList();
         }
 
         //Add or edit topic

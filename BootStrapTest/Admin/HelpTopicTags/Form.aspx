@@ -35,7 +35,7 @@
                 <td><%# Eval("Help_Topic_Tag_Text") %></td>
                 <td>
                     <asp:LinkButton ID="btnRowDelete" runat="server" CssClass="btn btn-default btn-xs" OnClick="btnRowDelete_Click">
-                                <i class="fa fa-trash-o"></i> Delete
+                        <i class="fa fa-trash-o"></i> Delete
                     </asp:LinkButton>
                 </td>
             </tr>
