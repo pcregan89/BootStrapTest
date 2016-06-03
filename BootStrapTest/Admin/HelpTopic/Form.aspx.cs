@@ -156,7 +156,7 @@ namespace BootStrapTest.Admin.HelpTopic
                 sb.Replace("&lt;a", "<a");
                 sb.Replace("&lt;/a&gt;", "</a>");
                 sb.Replace("&lt;img", "<img");
-                sb.Replace("&gt", ">");
+                
                 sb.Replace("&lt;li&gt;", "<li>");
                 sb.Replace("&lt;/li&gt;", "</li>");
                 sb.Replace("&lt;ul&gt;", "<ul>");
@@ -167,6 +167,7 @@ namespace BootStrapTest.Admin.HelpTopic
                 sb.Replace("&lt;/span&gt;", "</span>");
                 sb.Replace("&amp;nbsp;", " ");
                 sb.Replace("&quot;", "\"");
+                sb.Replace("&gt;", ">");
 
                 topicTitle = sb.ToString();
                 

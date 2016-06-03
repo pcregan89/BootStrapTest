@@ -158,10 +158,12 @@ namespace BootStrapTest.Helpers
             bool del = true;
             topic = GetHelpTopic(db, id);
             HelpTopicRelated helper = new HelpTopicRelated();
+            HelpTopicTag helperTag = new HelpTopicTag();
 
             if (topic != null)
             {
                 helper.DeleteHelpTopicRelatedTopic(db, id);
+                helperTag.DeleteHelpTopicTagTopic(db, id);
                 db.tbl_Help_Topics.DeleteOnSubmit(topic);
                 db.SubmitChanges();
             }

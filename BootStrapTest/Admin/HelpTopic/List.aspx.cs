@@ -12,7 +12,7 @@ namespace BootStrapTest.Admin.HelpTopic
         Helpers.HelpTopic helper = new Helpers.HelpTopic();
         Helpers.HelpCategory helperCat = new Helpers.HelpCategory();
         dbDataContext db = new dbDataContext();
-        List<int> deleteItems;
+        List<int> deleteItems = new List<int>();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -33,22 +33,8 @@ namespace BootStrapTest.Admin.HelpTopic
             }
             else
             {
-                //drop down list should be the only thing that causes a posback
-                if (ddlCategory.SelectedIndex > 0)
-                {
-                    rptHelpTopic.DataSource = helper.GetHelpTopicCategory(db, Convert.ToInt32(ddlCategory.SelectedValue));
-                    rptHelpTopic.DataBind();
-                }
-                else
-                {
-                    rptHelpTopic.DataSource = helper.GetHelpTopics(db);
-                    rptHelpTopic.DataBind();
-                }
 
-                if (HttpContext.Current.Session["deleteItems"] != null)
-                    deleteItems = (List<int>)HttpContext.Current.Session["deleteItems"];
-                else
-                    deleteItems = new List<int>();
+                //drop down list should be the only thing that causes a posback
 
                 Title = "List of Help Topics";
             }
@@ -82,12 +68,25 @@ namespace BootStrapTest.Admin.HelpTopic
             bool? deleted = null;
             int deletedCount = deleteItems.Count;
 
-            foreach(int item in deleteItems)
+            foreach (RepeaterItem item in rptHelpTopic.Items)
+            {
+                CheckBox del = (CheckBox)item.FindControl("selectedRow");
+
+                if (del.Checked)
+                {
+                    int topicID = Convert.ToInt32(del.InputAttributes["Value"].ToString());
+
+                    if (!deleteItems.Contains(topicID))
+                        deleteItems.Add(topicID);
+                }
+            }
+
+                foreach (int item in deleteItems)
             {
                 deleted = helper.DeleteHelpTopic(db, item);
             }
 
-            HttpContext.Current.Session["deleteItems"] = null;
+            deleteItems = null;
             Server.TransferRequest(Request.Url.AbsolutePath, false);
         }
 
@@ -110,6 +109,20 @@ namespace BootStrapTest.Admin.HelpTopic
 
                 HttpContext.Current.Session["deleteItems"] = deleteItems;
 
+        }
+
+        protected void btnRefresh_Click(object sender, EventArgs e)
+        {
+            if (ddlCategory.SelectedIndex > 0)
+            {
+                rptHelpTopic.DataSource = helper.GetHelpTopicCategory(db, Convert.ToInt32(ddlCategory.SelectedValue));
+                rptHelpTopic.DataBind();
+            }
+            else
+            {
+                rptHelpTopic.DataSource = helper.GetHelpTopics(db);
+                rptHelpTopic.DataBind();
+            }
         }
     }
 }

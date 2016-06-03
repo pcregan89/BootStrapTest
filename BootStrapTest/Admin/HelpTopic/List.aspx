@@ -9,7 +9,8 @@
         <button type="button" class="btn btn-primary" onclick="javascript:window:location.href='../../Admin/HelpTopic/form.aspx?id=-1'; return false;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Add New</button>
         <button type="button" id="deleteButton" class="btn btn-danger" data-toggle="modal" data-target="#dlModal"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
     <p style="display:inline">Filter By Category:</p>
-    <asp:DropDownList ID="ddlCategory" runat="server" CssClass="btn btn-default dropdown-toggle" AutoPostBack="true"></asp:DropDownList>
+   <asp:DropDownList ID="ddlCategory" runat="server" CssClass="btn btn-default dropdown-toggle"></asp:DropDownList>
+    <asp:Button ID="btnRefresh" runat="server" Text="Filter" CssClass="btn btn-default" OnClick="btnRefresh_Click" />
     <table class="table table-hover table-responsive" style="border-top:hidden;">          
             <asp:Repeater ID="rptHelpTopic" runat="server" OnItemDataBound="rptHelpTopic_ItemDataBound" >
 
@@ -45,7 +46,7 @@
             </Triggers>
         </asp:UpdatePanel>
                         
-                        <td><asp:checkbox id="selectedRow" runat="server" checked="false" OnCheckedChanged="selected_CheckedChanged" AutoPostBack="true" OnClientClick="return false;"/>
+                        <td><asp:checkbox id="selectedRow" runat="server" Checked="false" OnClientClick="return false;"/>
                         <td><asp:Label runat="server" ID="lblCatParent" Text='<%# Eval("Help_Category_ID") %>' /></td>
                         <td><%# Eval("Help_Topic_Header") %></td>
                         <td><%# Eval("Help_Topic_View_Count") %></td>
