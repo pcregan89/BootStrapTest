@@ -175,8 +175,12 @@ namespace BootStrapTest
 
         protected void btnShare_Click(object sender, EventArgs e)
         {
+            tbl_Help_Topic topic = new tbl_Help_Topic();
+            Helpers.HelpTopic helper = new Helpers.HelpTopic();
+            topic = helper.GetHelpTopic(db, topicID);
+
             helper.UpdateHelpTopicShareCount(db, topicID);
-            Response.Redirect("mailto:?subject=" + helpTopicTitle.Text + " - Meat Connected" + "&body=" + helpTopicText.Text);  
+            Response.Redirect("mailto:?subject=" + topic.Help_Topic_Header + " - Meat Connected");
         }
 
     }
