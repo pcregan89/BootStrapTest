@@ -32,8 +32,12 @@ namespace BootStrapTest
             {
                 lblIcon.CssClass = "fa fa-level-up fa-flip-horizontal";
                 tbl_Help_Category cat = helper.GetHelpCategory(db, id);
-                lnkHome.Text = cat.Help_Category_Name;
-                hfID.Value = cat.Help_Category_ID.ToString();
+
+                if (cat != null)
+                {
+                    lnkHome.Text = cat.Help_Category_Name;
+                    hfID.Value = cat.Help_Category_ID.ToString();
+                }
                 //Helpers.HelpTopic helperTopic = new Helpers.HelpTopic();
                 //tbl_Help_Topic topic = new tbl_Help_Topic();
                 //tbl_Help_Category cat = new tbl_Help_Category();

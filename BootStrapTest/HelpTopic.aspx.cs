@@ -53,7 +53,7 @@ namespace BootStrapTest
 
                         helpTopicText.Text = tht.Help_Topic_Text;
                         helpTopicTitle.Text = tht.Help_Topic_Header;
-                        helpTopicCategory.Text = "Category: " + "<strong>" + thc.Help_Category_Name + "</strong>";
+                        helpTopicCategory.Text = "Category: " + "<a href=\"TopicList.aspx?CatID="+thc.Help_Category_ID.ToString()+"\"><strong>" + thc.Help_Category_Name + "</strong></a>";
                         lblLastUpdated.Text = "Last Updated: " + tht.Help_Topic_Last_Updated.Value.ToShortDateString();
 
                         if (tags.Count != 0)
