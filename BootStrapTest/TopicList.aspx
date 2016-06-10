@@ -29,9 +29,12 @@
                             <br />
                         </FooterTemplate>
                     </asp:Repeater>
-                    <i class="fa fa-link"></i>   <a href='HelpTopic.aspx?id=<%#Eval("Help_Topic_ID") %>'>Permalink</a>  |  
+                    <i class="fa fa-link"></i>   
+                    <a href='HelpTopic.aspx?id=<%#Eval("Help_Topic_ID") %>'>Permalink</a>  |  
                     <i class="fa fa-envelope-o"></i>
-                    <asp:LinkButton runat="server" ID="lnkShare" Text="Share" OnClick="lnkShare_Click"></asp:LinkButton>
+                    <asp:LinkButton runat="server" ID="lnkShare" Text="Share" OnClick="lnkShare_Click"></asp:LinkButton>  <%--|  
+                    <i class="fa fa-external-link"></i> 
+                    <asp:LinkButton runat="server" ID="lnkPerm" Text="Popout" OnClick="lnkPerm_Click" OnClientClick="aspnetForm.target = '_blank';"></asp:LinkButton>--%>
                 </div>
             </ItemTemplate>
         </asp:Repeater>

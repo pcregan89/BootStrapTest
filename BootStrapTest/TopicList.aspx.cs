@@ -67,5 +67,15 @@ namespace BootStrapTest
                     rptTags.Visible = false;
             }
         }
+
+        protected void lnkPerm_Click(object sender, EventArgs e)
+        {
+            LinkButton lnk = (LinkButton)sender;
+            RepeaterItem item = (RepeaterItem)lnk.NamingContainer;
+            Label lblID = (Label)item.FindControl("lblID");
+            
+            string script = "window.open('PopupTopic.aspx?id=" + lblID.Text + "','Graph','height=600,width=400,top=50,left=200');";
+            ClientScript.RegisterStartupScript(this.Page.GetType(), "", script, true);
+        }
     }
 }

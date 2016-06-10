@@ -5,8 +5,8 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="col-xs-8 col-xs-offset-1">
-
-            <h3 style="padding-top:20px"><asp:Label ID ="helpTopicTitle" runat="server"></asp:Label></h3> 
+        
+        <h3 style="padding-top:20px"><asp:Label ID ="helpTopicTitle" runat="server"></asp:Label></h3> 
         <br />
         <asp:Label ID="helpTopicText" runat="server"></asp:Label>
         <br /><br />
@@ -51,4 +51,6 @@
 
         
     </div>
+</asp:Content>
+<asp:Content runat="server" id="Content3" ContentPlaceHolderID="javascript">
 </asp:Content>

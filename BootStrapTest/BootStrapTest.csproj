@@ -195,6 +195,7 @@
     <Content Include="Content\bootstrap-rating.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\popup.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\trumbowyg.min.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -214,9 +215,11 @@
     <Content Include="Images\mcicon.jpg" />
     <Content Include="Master\AdminMaster.Master" />
     <Content Include="Master\MainMaster.Master" />
+    <Content Include="Master\PopupMaster.Master" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Home.aspx" />
     <Content Include="Plugins\bootstrap-rating.js" />
+    <Content Include="PopupTopic.aspx" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -376,7 +379,21 @@
     <Compile Include="Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Master\PopupMaster.Master.cs">
+      <DependentUpon>PopupMaster.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master\PopupMaster.Master.designer.cs">
+      <DependentUpon>PopupMaster.Master</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="PopupTopic.aspx.cs">
+      <DependentUpon>PopupTopic.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PopupTopic.aspx.designer.cs">
+      <DependentUpon>PopupTopic.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Search.aspx.cs">
       <DependentUpon>Search.aspx</DependentUpon>

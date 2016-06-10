@@ -1,0 +1,34 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="PopupMaster.master.cs" Inherits="BootStrapTest.Master.PopupMaster" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link href="../Content/bootstrap.css" rel="stylesheet" />
+    <link href="../Content/popup.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
+    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+        <!-- Bootstrap core JavaScript
+	================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>--%>
+        
+        <!-- page javascript goes here -->
+        <asp:ContentPlaceHolder ID="javascript" runat="server">
+            <script src="<%= ResolveUrl("~/Scripts/jquery-1.12.2.min.js") %>"></script>
+            <script src="<%= ResolveUrl("~/Scripts/bootstrap.min.js") %>"></script>
+        </asp:ContentPlaceHolder>
+    </form>
+</body>
+</html>
