@@ -20,6 +20,57 @@ namespace BootStrapTest.Admin.RelatedTopics
             {
                 rptHelpTopic.DataSource = helper.GetHelpTopics(db);
                 rptHelpTopic.DataBind();
+
+                ddlCategory.Items.Add("--Select--");
+                foreach (tbl_Help_Category thc in helperCat.GetHelpCategories(db))
+                {
+
+                    ListItem li = new ListItem();
+                    tbl_Help_Category cat;
+                    Helpers.HelpCategory parentCatHelper = new Helpers.HelpCategory();
+                    int foundParent, childCount = 0;
+                    foundParent = ddlCategory.Items.IndexOf(ddlCategory.Items.FindByValue(thc.Help_Category_Parent_ID.ToString()));
+
+
+                    if (thc.Help_Category_Parent_ID != null)
+                    {
+                        childCount++;
+                        cat = parentCatHelper.GetHelpCategory(db, Convert.ToInt32(thc.Help_Category_Parent_ID));
+
+                        for (int x; ;)
+                        {
+                            if (cat.Help_Category_Parent_ID != null)
+                            {
+                                childCount++;
+                                cat = parentCatHelper.GetHelpCategory(db, Convert.ToInt32(cat.Help_Category_Parent_ID));
+                            }
+                            else
+                                break;
+                        }
+
+                    }
+
+                    li.Text = "";
+                    li.Value = thc.Help_Category_ID.ToString();
+
+                    if (foundParent > -1)
+                    {
+                        for (int x = 0; x < childCount; x++)
+                        {
+                            li.Text += HttpUtility.HtmlDecode("&nbsp;&nbsp;");
+                        }
+
+                        li.Text += "--" + thc.Help_Category_Name;
+                        ddlCategory.Items.Insert(foundParent + 1, li);
+
+                    }
+                    else
+                    {
+                        li.Text = thc.Help_Category_Name;
+                        ddlCategory.Items.Add(li);
+                    }
+
+                }
             }
         }
 
@@ -54,6 +105,20 @@ namespace BootStrapTest.Admin.RelatedTopics
 
                     }
                 }
+            }
+        }
+
+        protected void btnRefresh_Click(object sender, EventArgs e)
+        {
+            if (ddlCategory.SelectedIndex > 0)
+            {
+                rptHelpTopic.DataSource = helper.GetHelpTopicCategory(db, Convert.ToInt32(ddlCategory.SelectedValue));
+                rptHelpTopic.DataBind();
+            }
+            else
+            {
+                rptHelpTopic.DataSource = helper.GetHelpTopics(db);
+                rptHelpTopic.DataBind();
             }
         }
     }

@@ -50,17 +50,57 @@ namespace BootStrapTest.Admin.HelpTopic
                     }
                 }
 
-             
 
-                    foreach (tbl_Help_Category thc in helperCat.GetHelpCategories(db))
+
+                foreach (tbl_Help_Category thc in helperCat.GetHelpCategories(db))
+                {
+
+                    ListItem li = new ListItem();
+                    tbl_Help_Category cat;
+                    Helpers.HelpCategory parentCatHelper = new Helpers.HelpCategory();
+                    int foundParent, childCount = 0;
+                    foundParent = helpTopicCategory.Items.IndexOf(helpTopicCategory.Items.FindByValue(thc.Help_Category_Parent_ID.ToString()));
+
+
+                    if (thc.Help_Category_Parent_ID != null)
                     {
+                        childCount++;
+                        cat = parentCatHelper.GetHelpCategory(db, Convert.ToInt32(thc.Help_Category_Parent_ID));
 
-                        ListItem li = new ListItem();
-                        li.Text = thc.Help_Category_Name;
-                        li.Value = thc.Help_Category_ID.ToString();
-                        helpTopicCategory.Items.Add(li);
+                        for (int x; ;)
+                        {
+                            if (cat.Help_Category_Parent_ID != null)
+                            {
+                                childCount++;
+                                cat = parentCatHelper.GetHelpCategory(db, Convert.ToInt32(cat.Help_Category_Parent_ID));
+                            }
+                            else
+                                break;
+                        }
 
                     }
+
+                    li.Text = "";
+                    li.Value = thc.Help_Category_ID.ToString();
+
+                    if (foundParent > -1)
+                    {
+                        for (int x = 0; x < childCount; x++)
+                        {
+                            li.Text += HttpUtility.HtmlDecode("&nbsp;&nbsp;");
+                        }
+
+                        li.Text += "--" + thc.Help_Category_Name;
+                        helpTopicCategory.Items.Insert(foundParent + 1, li);
+
+                    }
+                    else
+                    {
+                        li.Text = thc.Help_Category_Name;
+                        helpTopicCategory.Items.Add(li);
+                    }
+
+                }
 
 
                 if (topicID > 0)
@@ -79,7 +119,7 @@ namespace BootStrapTest.Admin.HelpTopic
                         helpTopicCategory.Items.FindByValue(tht.Help_Category_ID.ToString()).Selected = true;
 
                         if (tht.Help_Topic_Priority != null)
-                        { 
+                        {
                             ListItem liCurrent = new ListItem();
                             liCurrent.Text = tht.Help_Topic_Priority.ToString();
                             liCurrent.Value = tht.Help_Topic_Priority.ToString();
@@ -87,18 +127,18 @@ namespace BootStrapTest.Admin.HelpTopic
                             ddlPriority.Items.Add(liCurrent);
                             ddlPriority.Items.FindByText(liCurrent.Text).Selected = true;
                         }
-                        
+
                     }
-                    catch(InvalidOperationException)
+                    catch (InvalidOperationException)
                     {
                         heading.Text = "Invalid help topic";
                         result.Text = "Invalid help topic";
                         result.CssClass = "bg-danger";
                         submitButton.Visible = false;
                     }
-                    
-                   
-                    
+
+
+
                 }
                 else
                 {
@@ -122,7 +162,7 @@ namespace BootStrapTest.Admin.HelpTopic
         }
 
         protected void submitButton_Click(object sender, EventArgs e)
-        
+
         {
             int category;
             string topicHeader, topicTitle = "";
@@ -156,7 +196,7 @@ namespace BootStrapTest.Admin.HelpTopic
                 sb.Replace("&lt;a", "<a");
                 sb.Replace("&lt;/a&gt;", "</a>");
                 sb.Replace("&lt;img", "<img");
-                
+
                 sb.Replace("&lt;li&gt;", "<li>");
                 sb.Replace("&lt;/li&gt;", "</li>");
                 sb.Replace("&lt;ul&gt;", "<ul>");
@@ -170,7 +210,7 @@ namespace BootStrapTest.Admin.HelpTopic
                 sb.Replace("&gt;", ">");
 
                 topicTitle = sb.ToString();
-                
+
 
                 loggedOutAvailable = availableLoggedOut.Checked;
 
@@ -200,7 +240,7 @@ namespace BootStrapTest.Admin.HelpTopic
                 param.Set("id", topicID.ToString());
 
                 if (topicID > 0)
-                {            
+                {
                     param.Set("message", "Successfully updated help topic");
                     Response.Redirect(url + "?" + param.ToString());
                 }
